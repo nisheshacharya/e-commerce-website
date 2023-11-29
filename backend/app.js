@@ -3,6 +3,7 @@ const userRouter = require('./routes/userRouter');
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const { connectToDB } = require('./utils/database');
+const productRouter = require('./routes/productRouter')
 
 
 const app = express(); 
@@ -18,6 +19,7 @@ app.use(cors());
 
 //routes
 app.use('/', userRouter)
+app.use('/products', productRouter )
 
 
 app.listen(port, ()=>{console.log("listening at 3000")});
