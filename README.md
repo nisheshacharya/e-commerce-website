@@ -12,3 +12,19 @@
         write CURD functions for User, products and cart
         Implement authentication 
         Test the backend and make sure every this is running. 
+
+*11/29/2023
+
+    Yesterday: 
+        Tried to work with mongodb Atlas and got stuck.
+        Setup regular mongodb for backend. 
+        implemented and tested signup on backend.
+        implemented and tested login on backend. 
+        implemented jwt token while logging in on backend. 
+
+    Plan for today: 
+        Finish working on backend. 
+
+
+
+    
