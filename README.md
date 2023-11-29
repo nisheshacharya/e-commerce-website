@@ -23,7 +23,8 @@
         implemented jwt token while logging in on backend. 
 
     Plan for today: 
-        Finish working on backend. 
+        Finish working on backend.
+        
 
 
 
