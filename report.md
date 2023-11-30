@@ -16,7 +16,7 @@
     implement signup, login and jwt token. 
 * Block: N/A
 
-## 12/28/2023
+## 12/29/2023
 * Yesterday:
     Setup regular mongodb for backend. 
     implemented and tested signup on backend.
@@ -28,6 +28,13 @@
 * Block:
     Tried to use mongoDB Atlas but could not connect. 
 
+## 12/30/2023
+* Yesterday:
+    implemented and tested crud operations for product and order on backend. 
+* Today: 
+   Create sign up, login, products, product, cart, orders, order component on front end and integrate with backend. 
+* Block:
+    Ran upon multiple errors, but was able to resolve them.  
 
 
     

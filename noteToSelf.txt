@@ -1,6 +1,6 @@
 To work on: 
 -Object id is hardcoaded for now on the products. Need to fix that. 
 - When the product is duplicated, proper error message not seen with the status.
-- 
+
 
 
