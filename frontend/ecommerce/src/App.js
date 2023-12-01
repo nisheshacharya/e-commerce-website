@@ -16,7 +16,7 @@ function App() {
         if (res) {
             setState({ ...state, user: res });
         }
-    }, [state]);
+    }, []);
 
     return (
         <GlobalContext.Provider value={{ state, setState }}>

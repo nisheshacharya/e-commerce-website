@@ -8,11 +8,7 @@ const myRouter = createBrowserRouter([
         path: "/",
         element: <Home/>
     },
-    {
-        path: "/home",
-        element: <Home/>
-    },
-
+   
     {
         path: "/signup",
         element: <Signup/>

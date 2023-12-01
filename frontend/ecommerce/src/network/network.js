@@ -31,3 +31,35 @@ export async function login (email, password){
         return;
     }
 }
+
+//Get Products
+
+export async function getProducts(token){
+    const url = "http://localhost:3001/products";
+
+    console.log("ger Product hit from network");
+
+    try{
+        
+        const res = await axios.get(url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        console.log("res----", res)
+
+        if(res.status === 200){
+            console.log("res:-------", res.data);
+            return res.data;
+        }
+
+    }
+    catch(err){
+        console.log("error");
+        console.log("error on network")
+        return null;
+
+    }
+
+}
