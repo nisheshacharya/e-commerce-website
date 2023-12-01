@@ -1,22 +1,23 @@
 import {useState} from 'react';
 import { login } from '../network/network'; 
-import { useNavigation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login(e){
     
     const [newLogin, setNewLogin] = useState({ email: "", password: "" });
-    const navigate = useNavigation();
+    const navigate = useNavigate();
 
 
     const handleLogin = async (e)=> {
         e.preventDefault();
-        console.log("handleLogin hit: ", newLogin.email, newLogin.password);
+    
         try{
         const res = await login(newLogin.email, newLogin.password);
-        console.log("res", res)
+    
         console.log("token: ", res.token)
-        if(res.data.success){
-            navigate('/')
+        if(res.data.token){
+            localStorage.setItem("token", res.data.token);
+            navigate('/home')
 
         }
         }
