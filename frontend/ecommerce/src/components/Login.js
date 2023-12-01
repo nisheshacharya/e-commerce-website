@@ -1,12 +1,15 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import { login } from '../network/network'; 
 import { useNavigate } from 'react-router-dom';
+import GlobalContext from '../context';
+import { Link } from 'react-router-dom';
 
 export default function Login(e){
     
     const [newLogin, setNewLogin] = useState({ email: "", password: "" });
     const navigate = useNavigate();
-
+    const {state, setState} = useContext(GlobalContext);
+    
 
     const handleLogin = async (e)=> {
         e.preventDefault();
@@ -14,18 +17,18 @@ export default function Login(e){
         try{
         const res = await login(newLogin.email, newLogin.password);
     
-        console.log("token: ", res.token)
-        if(res.data.token){
-            localStorage.setItem("token", res.data.token);
+        console.log("user: ", res.token)
+        if(res.token){
+            localStorage.setItem("user", res.token);
+            setState({...state, user: res.token})
             navigate('/home')
-
         }
         }
         catch(err){
-            console.error(err);
+            console.log("Error occurred");
         }
-
     }
+    const goToSignup = ()=> {navigate('/signup')}
     const setLoginDetails = (e) => setNewLogin({...newLogin, [e.target.name]: e.target.value})
 
     return(
@@ -36,6 +39,8 @@ export default function Login(e){
             <input placeholder="password" type="password" name='password' onChange={setLoginDetails}/>
             <input type="submit" value= "login" />
             </form>
+            <p>Don't have an account? </p>
+            <button onClick={goToSignup}>Signup</button>
         </div>
     )
 }
