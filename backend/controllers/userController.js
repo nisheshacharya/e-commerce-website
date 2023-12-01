@@ -32,6 +32,7 @@ exports.registerUser = async (req, res) => {
 
 // User login
 exports.loginUser = async (req, res) => {
+  console.log("Login user on userController hit")
   const { email, password } = req.body;
 
   try {

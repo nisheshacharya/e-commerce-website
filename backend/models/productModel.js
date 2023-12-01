@@ -45,7 +45,16 @@
       static async getAllProducts (){
         const db = getDb();
         return db.collection('products').find({}).toArray();
-      }
+    }
+
+//     static async updateProduct(productId, updateProduct){
+//             const db = getDb();
+//             return db.collection('products').updateOne({product_id:productId}, {
+//                 $set: {
+//                     prod
+//                 }
+//             })
+//     }
   }
 
   module.exports = Product;

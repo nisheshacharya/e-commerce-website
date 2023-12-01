@@ -9,7 +9,7 @@ const orderRouter = require('./routes/orderRouter');
 
 const app = express(); 
 
-const port = process.env.PORT || 3000;
+const port = 3001;
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
@@ -24,5 +24,5 @@ app.use('/products', productRouter )
 app.use('/orders', orderRouter);
 
 
-app.listen(port, ()=>{console.log("listening at 3000")});
+app.listen(port, ()=>{console.log("listening at", port)});
 connectToDB();
