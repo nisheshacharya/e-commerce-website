@@ -1,36 +1,49 @@
+import '../../styles/Style.css'
 import { useEffect, useState } from "react";
 import { getUserName } from "../../network/network";
 
 export default function Product({ product }) {
-  const [userName, setUserName] = useState(null);
+  const [averageRating, setAverageRating] = useState(null);
+  const [showReview, setShowReview] = useState(false);
 
-  useEffect(() => {
-    const fetchUserName = async () => {
-      try {
-        console.log();
-        const userObject = await getUserName(product.reviews[0].userId);
-        console.log("name: ", userObject.user.userName)
-        setUserName(userObject.user.userName);
-      } catch (error) {
-        console.error("Error getting name", error);
-      }
-    };
+  let totalRating = 0;
 
-    fetchUserName();
-  }, [product.reviews]); // Make sure to include the dependency array to prevent unnecessary re-renders
+  console.log(product);
 
-  console.log("product::::", product.reviews[0].text);
+  useEffect(()=>{
+    product.reviews.map((review)=>(totalRating += review.rating))
+    console.log(totalRating)
+    setAverageRating(totalRating/product.reviews.length)
+    console.log("average rating", averageRating);
+  })
+  const toggleReview = ()=>{
+    setShowReview(!showReview);
+    console.log(showReview)
+  }
 
   return (
-    <div>
+    <div className="product-container">
       <div className="product-description-container">
         <h2>{product.name}</h2>
-        <p>{userName ? `Reviewed by: ${userName}` : "Loading..."}</p>
+        <h3>Rating: {averageRating}</h3>
+        <div>
+        {product.images.map(image=> (<img src="${image}" />))}
+        </div>
+        <button>Add to cart</button>
+        <button onClick={toggleReview}> {showReview ? "Hide Review" : "Show Review"}</button>
       </div>
-      <div className="review-container">
-        <h3> Reviews</h3>
-        <p>{product.reviews.map((review) => <div key={review._id}>{review.text}</div>)}</p>
-      </div>
+
+      {showReview && <div className="review-container">
+        <h4> Reviews</h4>
+        <div className="review">
+        {
+        product.reviews.map((review) => (<div className="review-each" key={review._id}> 
+        <p>{review.text}</p>
+        <h5> - {review.name || "Unknown User"}</h5>
+        </div>))
+        }
+        </div>
+      </div> }
     </div>
   );
 }

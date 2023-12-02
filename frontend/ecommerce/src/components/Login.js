@@ -21,7 +21,7 @@ export default function Login(e){
         if(res.token){
             localStorage.setItem("user", res.token);
             setState({...state, user: res.token})
-            navigate('/home')
+            navigate('/')
         }
         }
         catch(err){

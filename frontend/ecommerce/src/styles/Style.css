@@ -1,0 +1,23 @@
+.product-container {
+    display: flex;
+    flex-direction: row; 
+    margin: auto;
+   
+  }
+  
+  .product-description-container {
+    display: flex;
+    padding: 5px;
+    margin: auto;
+    flex-direction: column;
+    
+   
+  }
+  
+  .review-container {
+    padding: 5px;
+    margin: auto;
+    
+   
+  }
+  

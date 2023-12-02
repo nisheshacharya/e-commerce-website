@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import myRouter from './router/Layout';
 import GlobalContext from './context';
 import { useContext, useEffect, useState } from 'react';
-import Login from './components/Login';
+// import Login from './components/Login';
 import mySignupRouter from './router/SignUpLayout';
 import Header from './components/Header';
 
