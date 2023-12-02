@@ -28,6 +28,11 @@ class User {
     const db = getDb();
     return await db.collection('users').findOne({ email });
   }
+  
+  static async findById(userId) {
+    const db = getDb();
+    return await db.collection('users').findOne({ _id: new ObjectId(userId) });
+  }
 }
 
 module.exports = User;

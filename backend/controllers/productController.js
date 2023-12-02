@@ -21,12 +21,12 @@ exports.addProduct = async(req, res)=> {
 exports.getAllProducts = async(req, res) => {
     
     try{
-        const products = await Product.getAllProducts()
+        const products = await Product.getAllProducts();
         console.log("products from get all:-----", products)
         if(!products){
             return res.status(404).json({message: 'No products found'});
         }
-        res.status(200).json(products);
+        res.status(200).json({success: true, data: products});
     }
     catch(err){
         console.error(err);

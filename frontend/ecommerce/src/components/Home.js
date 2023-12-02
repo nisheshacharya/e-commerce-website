@@ -16,9 +16,9 @@ export default function Home(){
 
     const getProductsArray = async (token)=>{
         try{
-          const data = await getProducts(token)
-           console.log("products", data)
-           setProducts(data);
+          const res = await getProducts(token)
+           console.log("products", res.data)
+           setProducts(res.data);
         }
         catch(err){
             console.error(err);
@@ -33,7 +33,7 @@ export default function Home(){
             <Product product = {product}/>
             </div>
            ))}
-          
+        
         </div>
     )
 }

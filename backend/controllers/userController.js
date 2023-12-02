@@ -8,7 +8,6 @@ const User = require('../models/userModel');
 exports.registerUser = async (req, res) => {
   const { email, userName, password } = req.body;
 
-
   try {
     // Check if the email is already taken
     const existingUser = await User.findByEmail(email);
@@ -58,5 +57,52 @@ exports.loginUser = async (req, res) => {
     res.status(500).json({ message: 'Internal server error.' });
   }
 };
+
+// Authentication middleware
+exports.authMiddleware = (req, res, next) => {
+  if (!req.headers.authorization) {
+    return res.status(401).json({ success: false, error: "Please provide Authorization" });
+  }
+
+  const arr = req.headers.authorization.split(" ");
+
+  if (arr.length !== 2 || arr[0] !== "Bearer") {
+    return res.status(401).json({ success: false, error: "Please use Bearer scheme" });
+  }
+
+  try {
+    const decoded = jwt.verify(arr[1], JWT_SECRET);
+    if (decoded) {
+      
+      req.user = decoded;
+      next();
+    } else {
+      return res.status(401).json({ success: false, error: "Invalid token" });
+    }
+  } catch (error) {
+    return res.status(401).json({ success: false, error: "Invalid token" });
+  }
+};
+
+
+//Get user by Id
+
+exports.getUserById = async (req, res) => {
+
+  const {userId} = req.params;
+  console.log("userId", userId);
+  try{
+    const user = await User.findById(userId);
+    if(!user){
+      return res.status(400).json({message: "User not found"})
+    }
+    res.status(200).json({user});
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({message: 'Internal Server Error'});
+  } 
+};
+
 
 

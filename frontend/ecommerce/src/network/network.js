@@ -56,10 +56,29 @@ export async function getProducts(token){
 
     }
     catch(err){
-        console.log("error");
-        console.log("error on network")
+        console.error(err);
+      
         return null;
 
     }
 
+}
+
+// get user by ID
+
+export async function getUserName(userId){
+
+    const url = "http://localhost:3001/users";
+
+    try{
+
+        const res = await  axios.get(`${url}/${userId}`)
+        console.log(res.data)
+        return res.data;
+    }
+    catch(error){
+        console.error("Error fetching user from id", error);
+        return null;
+
+    }
 }
