@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CartItems from "./CartItems";
+import GlobalContext from "../../context";
 
 export default function Cart() {
-  const [cartData, setCartData] = useState([]);
+//   const [cartData, setCartData] = useState([]);
+  const {cartData, setCartData} = useContext(GlobalContext);
 
 
   useEffect(() => {

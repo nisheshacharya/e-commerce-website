@@ -1,15 +1,27 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import GlobalContext from "../../context";
 
 export default function CartItems({cartProduct}){
+
+const {cartData, setCartData} = useContext(GlobalContext);
+
 let averageRating = 0;
 let totalRating = 0;
 
     console.log(cartProduct)
     useEffect(()=>{
         cartProduct.reviews.map(review=>(totalRating += review.rating));
-        averageRating = totalRating /cartProduct.reviews.length;
+        averageRating = (totalRating /cartProduct.reviews.length).toFixed(1);
         console.log("average:",  averageRating);
-    })
+    },[])
+
+    const removeFromCart = ()=>{
+        const _idToRemove = cartProduct._id;
+        const filteredCart = cartData.filter(item => item._id !== cartProduct._id);
+        console.log(filteredCart);
+        
+
+    }
 
     return(
         <div>
@@ -25,6 +37,7 @@ let totalRating = 0;
                      ))}
                 </div>
                 <h4>Price: {cartProduct.price}</h4>
+                <button onClick={removeFromCart}> Remove from cart</button>
             </div>
                 
 

@@ -9,6 +9,8 @@ import Header from './components/Header';
 
 function App() {
     const [state, setState] = useState({ user: null });
+    const [cartData, setCartData] = useState([]);
+   
 
     useEffect(() => {
         const res = localStorage.getItem("user");
@@ -19,7 +21,7 @@ function App() {
     }, []);
 
     return (
-        <GlobalContext.Provider value={{ state, setState }}>
+        <GlobalContext.Provider value={{ state, setState, cartData, setCartData}}>
             <div className="App">
                 {/* <Header/> */}
                 {state?.user ? <RouterProvider router={myRouter}  /> : <RouterProvider router={mySignupRouter} />}

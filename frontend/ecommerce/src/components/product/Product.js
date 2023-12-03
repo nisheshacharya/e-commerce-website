@@ -1,16 +1,15 @@
 import '../../styles/Style.css';
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { getUserName } from "../../network/network";
 
+
+
 export default function Product({ product }) {
-  console.log("product: ", product);
+  // console.log("product: ", product);
   const [averageRating, setAverageRating] = useState(null);
   const [showReview, setShowReview] = useState(false);
 
   let totalRating = 0;
-
-  console.log(product);
-
   useEffect(() => {
     product.reviews.map((review) => (totalRating += review.rating));
     console.log(totalRating);
@@ -20,18 +19,22 @@ export default function Product({ product }) {
 
   const toggleReview = () => {
     setShowReview(!showReview);
-    console.log("fda",showReview);
+  
+    console.log("date:::: ", Date.now().toString())
   };
 
-  const hello = () =>{
-
-    console.log("hello");
-  }
 
   const addToCart = ()=>{
+
+    console.log("product", product);
+    let cartProduct = {...product};
+     
+    product.cartId = Date.now().toString();
+    console.log("product with cartId", cartProduct);
+    console.log(product.cartId)
     console.log("add to cart clicked");
     const localCart = JSON.parse(localStorage.getItem("cart")) || [];
-    localCart.push(product)
+    localCart.push(cartProduct)
     localStorage.setItem("cart", JSON.stringify(localCart));
     console.log("saved in Local Storage")
     console.log("from local storage: ", JSON.parse(localStorage.getItem("cart")))
