@@ -13,6 +13,7 @@ export default function Login(e){
 
     const handleLogin = async (e)=> {
         e.preventDefault();
+        console.log("Login clicked")
     
         try{
         const res = await login(newLogin.email, newLogin.password);

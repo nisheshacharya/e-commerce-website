@@ -2,8 +2,7 @@ const {getDb} = require('../utils/database');
 const {ObjectId} = require('mongodb');
 
 class Order{
-    constructor(orderId, userId,  items= [], totalAmount, orderDateTime, payment ){
-        this.orderId = orderId,
+    constructor(userId,  items= [], totalAmount, orderDateTime, payment ){
         this.userId = userId,
         this.items = items,
         this.orderDateTime = orderDateTime;
@@ -15,10 +14,7 @@ class Order{
     async saveOrder (){
     const db = getDb()
     try{
-        const existingOrder = await db.collection('orders').findOne({orderId: this.orderId});
-        if(existingOrder){
-            throw new Error("Duplicated order");
-        }
+        
         db.collection('orders').insertOne(this);
     }
     catch(err){

@@ -2,8 +2,7 @@
   const { ObjectId } = require('mongodb');
 
   class Product {
-      constructor(product_id, name, description, price, quantity, images = [], category, averageRating, reviews = []) {
-          this.productId = product_id;
+      constructor( name, description, price, quantity, images = [], category, averageRating, reviews = []) {
           this.name = name;
           this.description = description;
           this.price = price;
@@ -19,7 +18,7 @@
           const db = getDb();
 
           try {
-              const existingProduct = await db.collection('products').findOne({ productId: this.productId });
+              const existingProduct = await db.collection('products').findOne({ name: this.name });
               if (existingProduct) {
                   throw new Error("Product already exists");
               } else {
@@ -33,7 +32,7 @@
 
       static async findByProductId(productId) {
           const db = getDb();
-          return db.collection('products').findOne({ productId: productId });
+          return db.collection('products').findOne({ _id: new ObjectId(productId) });
       }
 
       static async findByProductName(productName) {

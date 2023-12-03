@@ -22,10 +22,11 @@ function App() {
         <GlobalContext.Provider value={{ state, setState }}>
             <div className="App">
                 {/* <Header/> */}
-               {state.user? <RouterProvider router={myRouter}/>: <RouterProvider router={mySignupRouter}/>}
+                {state?.user ? <RouterProvider router={myRouter}  /> : <RouterProvider router={mySignupRouter} />}
             </div>
         </GlobalContext.Provider>
     );
+    
 }
 
 export default App;

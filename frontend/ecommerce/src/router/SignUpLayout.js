@@ -1,20 +1,26 @@
 import {createBrowserRouter} from 'react-router-dom'
 import Signup from '../components/Signup'
 import Login from '../components/Login'
+import Cart from '../components/Cart/Cart';
 
 const mySignupRouter = createBrowserRouter([
     {
         path: "/",
-        element: <Login/>
+        element: <Login />
     },
     {
         path: "/signup",
-        element: <Signup/>
+        element: <Signup />
     },
     {
         path: "/login",
-        element: <Login/>
+        element: <Login />
+    },
+    {
+        path: "/cart",
+        element: <Cart />
     }
-])
+]);
 
 export default mySignupRouter;
+
