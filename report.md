@@ -66,3 +66,16 @@
   -Health problem, not able to work with full potential.
   - use of two routers(one for login, signup and other for rest of the components) did not work properly. I took help of friends, but it took a lot of time as all of them did not want to give up on the issue and kept trying. Finally, I temperoraly fixed the issue and moved on.
   - All of sudden, functions stopped rendering, checked everything, restarted computer but could not find the issue. Finally, tried another browser and it worked with no issue on Opera browser.
+
+## 12/04/2023
+
+- Yesterday:
+
+  - products added to cart, using local storage, remove from cart, created header.
+
+- Today:
+  work on orders component,
+- Block:
+  - could not work properly due to fever. It's improving though.
+  - cart count does not render automatically upon adding or removing from cart.
+  - still having problem with router.
