@@ -9,10 +9,10 @@ const [cartCount, setCartCount] = useState(0);
 
 const navigate = useNavigate();
 
-useState(()=>{
-setCartCount(JSON.parse(localStorage.getItem("cart")).length);
+// useState(()=>{
+// setCartCount(JSON.parse(localStorage.getItem("cart")).length);
 
-},[cartData])
+// },[cartData])
 
   const handleLogout = () => {
    localStorage.clear();
@@ -40,7 +40,7 @@ setCartCount(JSON.parse(localStorage.getItem("cart")).length);
         <p className="orders-text">Your Orders</p>
       </div>
       <div className="cart-container">
-        <p className='cart-count'>{cartCount}</p>
+        <p className='cart-count'>CHange later</p>
         {/* will put item number here later*/}
         <span role="img" aria-label="Cart Emoticon" className="cart-emoticon">
           🛒

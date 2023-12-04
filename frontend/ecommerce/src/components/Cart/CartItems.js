@@ -8,27 +8,27 @@ const {cartData, setCartData} = useContext(GlobalContext);
 let averageRating = 0;
 let totalRating = 0;
 
-    console.log("cart Product:", cartProduct)
-    useEffect(()=>{
-        cartProduct.reviews.map(review=>(totalRating += review.rating));
-        averageRating = (totalRating /cartProduct.reviews.length).toFixed(1);
-        console.log("average:",  averageRating);
-    },[])
+    // console.log("cart Product:", cartProduct)
+    // useEffect(()=>{
+    //     cartProduct.reviews.map(review=>(totalRating += review.rating));
+    //     averageRating = (totalRating /cartProduct.reviews.length).toFixed(1);
+    //     console.log("average:",  averageRating);
+    // },[])
 
-    const removeFromCart = ()=>{
-        console.log("cart_id",cartProduct)
-        const filteredCart = cartData.filter(item => item.cartId !== cartProduct.cartId);
-        localStorage.setItem("cart", JSON.stringify(filteredCart))
-        setCartData(JSON.parse(localStorage.getItem("cart")));
+    // const removeFromCart = ()=>{
+    //     console.log("cart_id",cartProduct)
+    //     const filteredCart = cartData.filter(item => item.cartId !== cartProduct.cartId);
+    //     localStorage.setItem("cart", JSON.stringify(filteredCart))
+    //     setCartData(JSON.parse(localStorage.getItem("cart")));
         
         
 
-    }
+    // }
 
     return(
         <div>
             <h4>Cart Items</h4>
-            <div>
+            {/* <div>
                 <h3>{cartProduct.name}</h3>
                 <h5>{cartProduct.description}</h5>
                 <div className="cart-image-container">
@@ -41,7 +41,7 @@ let totalRating = 0;
                 <h4>Price: {cartProduct.price}</h4>
                 <button onClick={removeFromCart}> Remove from cart</button>
                 <button>Checkout</button>
-            </div>
+            </div> */}
                 
 
         </div>

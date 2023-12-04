@@ -41,7 +41,17 @@ class Order{
       throw err;
   }
 }
+
+// static async getSummery(){
+//   const db = getDb();
+//   try{
+
+//   }
+// }
+
 }
+
+
 
  
 

@@ -4,6 +4,7 @@ import Signup from '../components/Signup'
 import WriteReview from '../components/review/WriteReview'
 import Cart from '../components/Cart/Cart'
 import OrderList from '../components/orders/OrderList'
+import OrderSummery from '../components/orders/OrderSummery'
 
 const myRouter = createBrowserRouter([
     {
@@ -25,7 +26,7 @@ const myRouter = createBrowserRouter([
     },
     {   
         path: "order",
-        element: <OrderList/>
+        element: <OrderSummery/>
     }
 ]);
 

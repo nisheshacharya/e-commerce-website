@@ -78,3 +78,22 @@ export async function getUserName(userId){
 
     }
 }
+
+export async function getAllOrders(token){
+    const url = "http://localhost:3001/orders/order";
+    try{
+
+
+        const res = await axios.get(url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return res.data
+    }
+    catch(error){
+    console.error ("Error getting orders", error)
+    return null;
+    }
+
+}
