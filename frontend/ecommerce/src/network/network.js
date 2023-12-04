@@ -37,8 +37,6 @@ export async function login (email, password){
 export async function getProducts(token){
     const url = "http://localhost:3001/products";
 
-    console.log("ger Product hit from network");
-
     try{
         
         const res = await axios.get(url, {
@@ -47,10 +45,8 @@ export async function getProducts(token){
             }
         })
 
-        console.log("res----", res)
-
         if(res.status === 200){
-            console.log("res:-------", res.data);
+            // console.log("res.data:-------", res.data);
             return res.data;
         }
 

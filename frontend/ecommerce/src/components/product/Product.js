@@ -1,6 +1,7 @@
 import '../../styles/Style.css';
-import { useEffect, useState} from "react";
+import { useContext, useEffect, useState} from "react";
 import { getUserName } from "../../network/network";
+import GlobalContext from '../../context';
 
 
 
@@ -10,6 +11,7 @@ export default function Product({ product }) {
   // console.log("product: ", product);
   const [averageRating, setAverageRating] = useState(null);
   const [showReview, setShowReview] = useState(false);
+  const {cartData, setCartData} = useContext(GlobalContext);
 
 
   let totalRating = 0;
@@ -20,26 +22,19 @@ export default function Product({ product }) {
 
   const toggleReview = () => {
     setShowReview(!showReview);
-  
-    // console.log("date:::: ", Date.now().toString())
   };
 
 
   const addToCart = ()=>{
 
-    // console.log("product", product);
     let cartProduct = {...product};
      
     cartProduct.cartId = Date.now().toString();
-    // console.log("product with cartId", cartProduct);
-    // console.log("Cart Id from product: ",cartProduct.cartId)
-    // console.log("add to cart clicked");
+
     const localCart = JSON.parse(localStorage.getItem("cart")) || [];
     localCart.push(cartProduct)
     localStorage.setItem("cart", JSON.stringify(localCart));
   
-    // console.log("saved in Local Storage")
-    // console.log("from local storage should be with cart Id:  ", JSON.parse(localStorage.getItem("cart")))
     }
   
 

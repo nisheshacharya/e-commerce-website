@@ -3,6 +3,7 @@ import Home from '../components/Home'
 import Signup from '../components/Signup'
 import WriteReview from '../components/review/WriteReview'
 import Cart from '../components/Cart/Cart'
+import OrderList from '../components/orders/OrderList'
 
 const myRouter = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const myRouter = createBrowserRouter([
         path: "cart",
         exact: false,
         element: <Cart/>
+    },
+    {   
+        path: "order",
+        element: <OrderList/>
     }
 ]);
 

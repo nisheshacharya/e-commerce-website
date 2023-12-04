@@ -6,11 +6,12 @@ import Header from "./Header";
 
 
 export default function Home(){
-    const {state, setState} = useContext(GlobalContext);
+    const {state, setState, test, setTest} = useContext(GlobalContext);
     const [products, setProducts] = useState([]);
+    // console.log("test from home:", test)
     
     useEffect(()=>{
-        console.log("user: ",state.user)
+        // console.log("user: ",state.user)
        getProductsArray(state.user);
        
     },[])

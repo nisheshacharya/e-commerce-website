@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../styles/Style.css'; 
 import {useNavigate} from 'react-router-dom';
 import GlobalContext from '../context';
 
 function Header(){
-const {state, setState} = useState(GlobalContext);
+const { cartData, setCartData} = useContext(GlobalContext);
 const [cartCount, setCartCount] = useState(0);
-console.log("state: from header ", state);
+
 const navigate = useNavigate();
 
 useState(()=>{
 setCartCount(JSON.parse(localStorage.getItem("cart")).length);
 
-})
+},[cartData])
 
   const handleLogout = () => {
    localStorage.clear();
