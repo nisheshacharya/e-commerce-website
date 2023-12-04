@@ -4,40 +4,42 @@ import { getUserName } from "../../network/network";
 
 
 
+
+
 export default function Product({ product }) {
   // console.log("product: ", product);
   const [averageRating, setAverageRating] = useState(null);
   const [showReview, setShowReview] = useState(false);
 
+
   let totalRating = 0;
   useEffect(() => {
     product.reviews.map((review) => (totalRating += review.rating));
-    console.log(totalRating);
-    setAverageRating(totalRating / product.reviews.length);
-    console.log("average rating", averageRating);
+    setAverageRating((totalRating / product.reviews.length).toFixed(1));
   });
 
   const toggleReview = () => {
     setShowReview(!showReview);
   
-    console.log("date:::: ", Date.now().toString())
+    // console.log("date:::: ", Date.now().toString())
   };
 
 
   const addToCart = ()=>{
 
-    console.log("product", product);
+    // console.log("product", product);
     let cartProduct = {...product};
      
-    product.cartId = Date.now().toString();
-    console.log("product with cartId", cartProduct);
-    console.log(product.cartId)
-    console.log("add to cart clicked");
+    cartProduct.cartId = Date.now().toString();
+    // console.log("product with cartId", cartProduct);
+    // console.log("Cart Id from product: ",cartProduct.cartId)
+    // console.log("add to cart clicked");
     const localCart = JSON.parse(localStorage.getItem("cart")) || [];
     localCart.push(cartProduct)
     localStorage.setItem("cart", JSON.stringify(localCart));
-    console.log("saved in Local Storage")
-    console.log("from local storage: ", JSON.parse(localStorage.getItem("cart")))
+  
+    // console.log("saved in Local Storage")
+    // console.log("from local storage should be with cart Id:  ", JSON.parse(localStorage.getItem("cart")))
     }
   
 

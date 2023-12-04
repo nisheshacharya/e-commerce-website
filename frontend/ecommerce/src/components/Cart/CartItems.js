@@ -8,7 +8,7 @@ const {cartData, setCartData} = useContext(GlobalContext);
 let averageRating = 0;
 let totalRating = 0;
 
-    console.log(cartProduct)
+    console.log("cart Product:", cartProduct)
     useEffect(()=>{
         cartProduct.reviews.map(review=>(totalRating += review.rating));
         averageRating = (totalRating /cartProduct.reviews.length).toFixed(1);
@@ -16,9 +16,11 @@ let totalRating = 0;
     },[])
 
     const removeFromCart = ()=>{
-        const _idToRemove = cartProduct._id;
-        const filteredCart = cartData.filter(item => item._id !== cartProduct._id);
-        console.log(filteredCart);
+        console.log("cart_id",cartProduct)
+        const filteredCart = cartData.filter(item => item.cartId !== cartProduct.cartId);
+        localStorage.setItem("cart", JSON.stringify(filteredCart))
+        setCartData(JSON.parse(localStorage.getItem("cart")));
+        
         
 
     }
@@ -38,6 +40,7 @@ let totalRating = 0;
                 </div>
                 <h4>Price: {cartProduct.price}</h4>
                 <button onClick={removeFromCart}> Remove from cart</button>
+                <button>Checkout</button>
             </div>
                 
 

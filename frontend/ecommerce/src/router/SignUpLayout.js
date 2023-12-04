@@ -19,6 +19,9 @@ const mySignupRouter = createBrowserRouter([
     {
         path: "/cart",
         element: <Cart />
+    },
+    {   path: "**",
+        element: <Login/>
     }
 ]);
 

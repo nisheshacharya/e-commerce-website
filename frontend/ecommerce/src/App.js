@@ -14,11 +14,18 @@ function App() {
 
     useEffect(() => {
         const res = localStorage.getItem("user");
-        console.log("from local storage: ",res )
+        // console.log("from local storage: ",res )
         if (res) {
+            // console.log("inside if(res)")
+
             setState({ ...state, user: res });
+           
         }
     }, []);
+
+    // console.log("state from app ", state)
+
+    
 
     return (
         <GlobalContext.Provider value={{ state, setState, cartData, setCartData}}>
