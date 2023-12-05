@@ -28,8 +28,8 @@ export default function Login(e){
           }
         } catch (error) {
           console.error("Error occurred:", error);
-          window.location.reload();
           alert("Login failed. Please try again.");
+    
           
         }
       };

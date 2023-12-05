@@ -153,3 +153,55 @@ img:hover {
 .logout-button:hover {
   background-color: #d00;
 }
+
+/* Checkout */
+
+.checkout-header {
+  padding: 20px;
+  width: 90%;
+}
+.checkout-body-container {
+  display: flex;
+  border: solid 1px gray;
+  margin: 20px;
+  padding: 20px;
+
+}
+.checkout-details {
+
+  border-bottom: solid 1px gray;
+  margin: 20px;
+  padding: 10px;
+
+}
+.shipping-container {
+  display: flex;
+  padding: 5px;
+}
+.shipping-container-header {
+
+  padding: 5px;
+  padding-right: 20px;
+
+}
+.shipping-container-body {
+  margin: auto;
+  border-bottom: 1px solid gray;
+  padding: 5px;
+  padding-left: 10px;
+  
+}
+
+.place-order-container {
+ margin-left: 25% ;
+ border: 1px solid gray;
+ border-radius: 5%;
+ width: 30%;
+}
+
+.index {
+  padding: 5px;
+  padding-right: 20px;
+
+
+}

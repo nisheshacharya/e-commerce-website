@@ -26,6 +26,7 @@ export default function Cart() {
     let tAmount= 0; 
     let copyCartData = [...cartData];
     copyCartData.map(item =>(tAmount+= item.price))
+    tAmount = tAmount.toFixed(2);
     return tAmount;
 
   }
@@ -36,10 +37,11 @@ export default function Cart() {
         <h3>Cart</h3>
     <div className="cart-total">
         <h4> Total- $ {getTotal()}</h4>
-        {localCartData.length >0 && <button>Checkout</button>}
+        <button> {getTotal() >0? "Checkout":""}</button>
     </div>
+   
 
-    {cartData.length >! 0? <h3> Cart empty</h3>:
+    {cartData.length === 0? <h3> Cart empty</h3>:
         <div>
      {cartData.map((cartProduct)=> (
         <div className="cart-product-container">
@@ -50,7 +52,7 @@ export default function Cart() {
 }
 <div className="cart-total">
         <h4> Total- $ {getTotal()}</h4>
-        {localCartData.length >0 && <button>Checkout</button>}
+        {getTotal() >0 && <button>Checkout</button>}
         
     </div>
   </div>

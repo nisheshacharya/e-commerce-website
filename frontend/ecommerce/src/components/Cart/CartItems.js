@@ -12,6 +12,7 @@ let totalRating = 0;
     useEffect(()=>{
         cartProduct.reviews.map(review=>(totalRating += review.rating));
         averageRating = (totalRating /cartProduct.reviews.length).toFixed(1);
+        console.log("cart product from cart Items", cartProduct);
       
     },[])
 
