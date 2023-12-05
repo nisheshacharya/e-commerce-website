@@ -1,10 +1,11 @@
 import {createBrowserRouter} from 'react-router-dom'
 import Home from '../components/Home'
-import Signup from '../components/Signup'
-import WriteReview from '../components/review/WriteReview'
+
+
 import Cart from '../components/Cart/Cart'
-import OrderList from '../components/orders/OrderList'
+
 import OrderSummery from '../components/orders/OrderSummery'
+import CheckOut from '../components/checkOut';
 
 const myRouter = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const myRouter = createBrowserRouter([
     {   
         path: "order",
         element: <OrderSummery/>
+    }, 
+    {
+        path: "checkout",
+        element: <CheckOut/>
     }
 ]);
 

@@ -3,6 +3,7 @@ import Signup from '../components/Signup'
 import Login from '../components/Login'
 import Cart from '../components/Cart/Cart';
 import OrderList from '../components/orders/OrderList';
+import CheckOut from '../components/checkOut';
 
 const mySignupRouter = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const mySignupRouter = createBrowserRouter([
     {   
         path: "order",
         element: <OrderList/>
+    },
+    {
+        path: "checkout",
+        element: <CheckOut/>
     }
 ]);
 

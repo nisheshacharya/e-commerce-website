@@ -22,7 +22,7 @@ exports.registerUser = async (req, res) => {
     await user.save();
 		console.log(user);
 
-    res.status(201).json({success:true, message: 'User registered successfully.' });
+    res.status(201).json({success:true, message: `User registered successfully.` });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error.' });
@@ -31,32 +31,33 @@ exports.registerUser = async (req, res) => {
 
 // User login
 exports.loginUser = async (req, res) => {
-  console.log("Login user on userController hit")
   const { email, password } = req.body;
 
   try {
     const user = await User.findByEmail(email);
 
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password.' });
+      return res.status(401).json({ message: 'Invalid email or password.', success: false });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid email or password.' });
+      // Display error message for incorrect login
+      return res.status(401).json({ message: 'Invalid email or password.', success: false });
     }
 
-    const token = jwt.sign({ userId: user._id, userName: user._userName, email: user.email, role: user.role }, JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id, userName: user.userName, email: user.email, role: user.role }, JWT_SECRET, {
       expiresIn: '6h',
     });
 
-    res.status(200).json({ token, userId: user._id, userName: user.userName });
+    res.status(200).json({ token, userId: user._id, userName: user.userName, success: true });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error.' });
   }
 };
+
 
 // Authentication middleware
 exports.authMiddleware = (req, res, next) => {

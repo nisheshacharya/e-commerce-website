@@ -76,6 +76,21 @@
 - Today:
   work on orders component,
 - Block:
-  - could not work properly due to fever. It's improving though.
+
+  - could not work properly due to fever. It's improving tho
   - cart count does not render automatically upon adding or removing from cart.
   - still having problem with router.
+
+  ## 12/05/2023
+
+- Yesterday:
+
+  - tried to fix router, did not work.
+  - alert message when login password/email is wrong.
+  - Started working on checkout.
+
+- Today:
+  work on orders component, checkout component, reviews and profile.
+
+- Block:
+  -

@@ -30,10 +30,12 @@ export default function Product({ product }) {
     let cartProduct = {...product};
      
     cartProduct.cartId = Date.now().toString();
+    cartProduct.orderDate = Date.now().toString();
 
     const localCart = JSON.parse(localStorage.getItem("cart")) || [];
     localCart.push(cartProduct)
     localStorage.setItem("cart", JSON.stringify(localCart));
+    setCartData(JSON.stringify(localCart));
   
     }
   

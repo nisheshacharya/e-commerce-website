@@ -10,6 +10,8 @@ import Header from './components/Header';
 function App() {
     const [state, setState] = useState({ user: null });
     const [cartData, setCartData] = useState([]);
+    const [totalAmount, setTotalAmount] = useState(0);
+    
    
 
     useEffect(() => {
@@ -28,9 +30,8 @@ function App() {
     
 
     return (
-        <GlobalContext.Provider value={{ state, setState, cartData, setCartData}}>
+        <GlobalContext.Provider value={{ state, setState, cartData, setCartData, totalAmount, setTotalAmount}}>
             <div className="App">
-                {/* <Header/> */}
                 {state?.user ? <RouterProvider router={myRouter}  /> : <RouterProvider router={mySignupRouter} />}
             </div>
         </GlobalContext.Provider>

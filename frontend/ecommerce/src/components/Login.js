@@ -11,24 +11,32 @@ export default function Login(e){
     const {state, setState} = useContext(GlobalContext);
     
 
-    const handleLogin = async (e)=> {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        console.log("Login clicked")
-    
-        try{
-        const res = await login(newLogin.email, newLogin.password);
-    
-        console.log("user: ", res.token)
-        if(res.token){
+      
+        try {
+          const res = await login(newLogin.email, newLogin.password);
+      
+          if (res && res.success) {
             localStorage.setItem("user", res.token);
-            setState({...state, user: res.token})
-            navigate('/')
+            setState({ ...state, user: res.token });
+            alert("Hello");
+            navigate("/");
+          } else {
+            const errorMessage = res && res.error ? res.error : "Login failed. Invalid email or password.";
+            alert(errorMessage);
+          }
+        } catch (error) {
+          console.error("Error occurred:", error);
+          window.location.reload();
+          alert("Login failed. Please try again.");
+          
         }
-        }
-        catch(err){
-            console.log("Error occurred");
-        }
-    }
+      };
+      
+      
+      
+      
     const goToSignup = ()=> {navigate('/signup')}
     const setLoginDetails = (e) => setNewLogin({...newLogin, [e.target.name]: e.target.value})
 

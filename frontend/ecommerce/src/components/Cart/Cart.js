@@ -5,38 +5,41 @@ import Header from "../Header";
 
 
 export default function Cart() {
-  const {cartData, setCartData} = useContext(GlobalContext);
-  const [totalAmount, setTotalAmount] = useState(0);
-  let localCartData;
+  const {cartData, setCartData, totalAmount, setTotalAmount} = useContext(GlobalContext);
+    
+  let localCartData=[];
   let total = 0;
 
 
   useEffect(() => {
-    localCartData = JSON.parse(localStorage.getItem("cart"))
-    let copyLocalData = [...localCartData]
+    localCartData = JSON.parse(localStorage.getItem("cart"));
+    if(localCartData){
+    let copyLocalData = [...localCartData];
     setCartData(localCartData); 
-    copyLocalData.forEach(item =>(total+=item.price))
+    copyLocalData.forEach(item =>(total+=item.price));
     setTotalAmount(total.toFixed(2))
+    console.log("total amount set: ", total.toFixed(2))
+    }
+  },[totalAmount]);
 
-;
-  },[]);
- 
-  
-    
- console.log("cart total", totalAmount)
+  const getTotal = ()=>{
+    let tAmount= 0; 
+    let copyCartData = [...cartData];
+    copyCartData.map(item =>(tAmount+= item.price))
+    return tAmount;
 
-  
+  }
 
   return (
     <div>
         <Header/>
         <h3>Cart</h3>
     <div className="cart-total">
-        <h4> Total- $ {totalAmount}</h4>
-        <button>Checkout</button>
+        <h4> Total- $ {getTotal()}</h4>
+        {localCartData.length >0 && <button>Checkout</button>}
     </div>
 
-    {!cartData? <h3> Cart empty</h3>:
+    {cartData.length >! 0? <h3> Cart empty</h3>:
         <div>
      {cartData.map((cartProduct)=> (
         <div className="cart-product-container">
@@ -46,12 +49,11 @@ export default function Cart() {
      </div>
 }
 <div className="cart-total">
-        <h4> Total- $ {totalAmount}</h4>
-        <button>Checkout</button>
+        <h4> Total- $ {getTotal()}</h4>
+        {localCartData.length >0 && <button>Checkout</button>}
+        
     </div>
-
-
-    </div>
+  </div>
   );
 }
 

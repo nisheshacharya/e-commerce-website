@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../styles/Style.css'; 
 import {useNavigate} from 'react-router-dom';
 import GlobalContext from '../context';
@@ -9,10 +9,10 @@ const [cartCount, setCartCount] = useState(0);
 
 const navigate = useNavigate();
 
-// useState(()=>{
-// setCartCount(JSON.parse(localStorage.getItem("cart")).length);
+useEffect(()=>{
+setCartCount(JSON.parse(localStorage.getItem("cart"))?.length);
 
-// },[cartData])
+},[cartData])
 
   const handleLogout = () => {
    localStorage.clear();
@@ -24,7 +24,7 @@ const navigate = useNavigate();
 
   return (
     <div className="header-container">
-      <div className="logo-container">
+      <div className="logo-container" onClick={()=>{navigate('/')}}>
         <img src="/path/to/your/logo.png" alt="Logo" className="logo" />
       </div>
       <div className="search-bar-container">
@@ -34,14 +34,13 @@ const navigate = useNavigate();
       </div>
 
       <div className="welcome-text-container">
-        <p className="welcome-text">Hello, User!</p>
+        <p className="welcome-text">Hello, {}!</p>
       </div>
       <div className="orders-container">
         <p className="orders-text">Your Orders</p>
       </div>
-      <div className="cart-container">
-        <p className='cart-count'>CHange later</p>
-        {/* will put item number here later*/}
+      <div className="cart-container" onClick={()=>{navigate('/cart')}}> 
+        <p className='cart-count'>{cartCount}</p>
         <span role="img" aria-label="Cart Emoticon" className="cart-emoticon">
           🛒
         </span>

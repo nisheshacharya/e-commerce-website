@@ -3,8 +3,8 @@ const Order = require('../models/orderModel');
 exports.addToOrder = async (req, res) =>{
     console.log("from orderController", req)
    
-    const {orderId, userId,  items, totalAmount, orderDateTime, payment, status } = req.body; 
-    const order = new Order(orderId, userId,  items, totalAmount, orderDateTime, payment, status); 
+    const {userId,  items, totalAmount, orderDateTime, payment, status } = req.body; 
+    const order = new Order(userId,  items, totalAmount, orderDateTime, payment, status); 
 
     try{
         await order.saveOrder(order);
@@ -32,7 +32,21 @@ exports.getAllOrders = async(req, res)=> {
         res.status(500).json({message:"server error"})
     }
 }
+
 exports.removeOrder = async (req, res)=>{
     
 }
+
+// exports.postManyOrders = async(req, res) => {
+//     const ordersReq = req.body;
+//     const order =  new Order()
+//     try{
+//         Order.postMultipleOrders(orders);
+//         return res.status(200).send({success: true, data: orders})
+//     }
+
+//     catch(error){
+//         res.status(500).json({message: "server error"})
+//     }
+// }
 
