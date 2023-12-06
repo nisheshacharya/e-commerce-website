@@ -18,6 +18,7 @@ export default function Home(){
         try{
           const res = await getProducts(token)
            setProducts(res.data);
+           
         }
         catch(err){
             console.error(err);

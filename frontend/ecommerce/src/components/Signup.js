@@ -12,7 +12,6 @@ export default function Signup() {
 
     const handleSignup = async (e) => {
         e.preventDefault();
-
         try {
             const res = await signup(newUser.name, newUser.email, newUser.password);
             console.log("res", res);
