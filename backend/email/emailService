@@ -1,0 +1,35 @@
+// services/emailService.js
+const nodemailer = require("nodemailer");
+
+const sendEmail = async (to) => {
+  try {
+    // Create a transporter with your email service credentials
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "nishtempemail@gmail.com",
+        pass: "dqmi frnu kwzx brbi",
+      },
+    });
+
+    const mailOptions = {
+      from: "nishtempemail@gmail.com",
+      to: "nishesh.acharya@gmail.com",
+      subject: "Product checked out!",
+      text: "Congratulations! Your product has been successfully checked out.",
+    };
+
+    // Send email
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sent:", info.response);
+
+    return { success: true, message: "Email sent successfully" };
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw { success: false, message: "Internal server error" };
+  }
+};
+
+module.exports = {
+  sendEmail,
+};

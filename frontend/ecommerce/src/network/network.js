@@ -101,3 +101,56 @@ export async function addOrder(order, token) {
     return null;
   }
 }
+
+// Add review
+
+export async function addReview(productId, review, token) {
+  const url = `http://localhost:3001/products/add-review/${productId}`;
+
+  try {
+    const res = await axios.patch(url, review, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Error adding review", error);
+    return null;
+  }
+}
+
+// Update user profile
+export async function updateProfile(newUserName, newEmail, token) {
+  const url = "http://localhost:3001/users/update-profile";
+
+  try {
+    const res = await axios.patch(
+      url,
+      { newUserName, newEmail },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return res.data;
+  } catch (error) {
+    console.error("Error updating profile", error);
+    return null;
+  }
+}
+
+// Send email
+export async function sendEmail(to) {
+  const url = "http://localhost:3001/email-service/send-email";
+
+  try {
+    const res = await axios.post(url, { to });
+    return res.data;
+  } catch (error) {
+    console.error("Error sending email", error);
+    return null;
+  }
+}

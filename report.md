@@ -93,4 +93,34 @@
   work on orders component, checkout component, reviews and profile.
 
 - Block:
-  -
+
+  ## 12/06/2023
+
+- Yesterday:
+
+  - Worked on checkout, component created and products rendered.
+  - Worked on router to fix the issue.
+  - Fixed the problem of cart not being rendered when no items are added.
+
+- Today:
+  work on orders component, checkout component, reviews and profile.
+
+- Block:
+  - Working on router took a lot of time, still have some issues while navigating.
+
+## 12/07/2023
+
+- Yesterday:
+
+  - Worked on checkout component. Products sent to orders when checked out.
+  - Worked on orders component. Order receives prop from checkout component.
+  - Worked parially on updateReview.
+  - researched paypal payment gateway with sandbox.
+  - researched email notification.
+
+- Today:
+  Complete update review, update profile.
+  -complete email notification and payment gateway.
+
+- Block:
+  - Ran through an issue in orders, the array inside an object was not being mapped, even on deep copy.

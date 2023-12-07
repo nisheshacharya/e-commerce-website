@@ -2,9 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import "../styles/Style.css";
 import { useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { addOrder } from "../network/network";
+import { addOrder, sendEmail } from "../network/network";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../context";
+import PayPalComponent from "./paypal/PayPalComponent";
 
 export default function CheckOut() {
   const navigate = useNavigate();
@@ -19,16 +20,20 @@ export default function CheckOut() {
     zip: "",
   });
 
+  const invalidAddress =
+    address.street == "" ||
+    address.city == "" ||
+    address.zip == "" ||
+    address.state == "";
   const location = useLocation();
-  let orderData = [];
-  let copyFromLocation = [];
+
   let cartTotal = 0;
 
   useEffect(() => {
     setCheckOutData(location.state);
     setCartTotalPrice(getCartTotal());
-    console.log(location.state.cartData);
-    console.log("location.state: ", location.state);
+    // console.log(location.state.cartData);
+    // console.log("location.state: ", location.state);
   }, [location.state, payMethod, cartTotalPrice]);
 
   const getCartTotal = () => {
@@ -48,8 +53,9 @@ export default function CheckOut() {
   const handleCheckOut = (e) => {
     console.log("checkout clicked");
 
-    copyFromLocation = [...location.state.cartData];
+    const copyFromLocation = [...location.state.cartData];
     const userId = jwtDecode(localStorage.getItem("user")).userId;
+    const userEmail = jwtDecode(localStorage.getItem("user")).email;
     const totalAmount = cartTotalPrice;
     const orderDateTime = Date.now();
     const payment = { method: payMethod };
@@ -66,6 +72,8 @@ export default function CheckOut() {
       payment,
       status,
     };
+    sendEmail(userEmail);
+
     addOrder(order, localStorage.getItem("user"));
     localStorage.removeItem("cart");
     setCartTotalPrice(0);
@@ -74,8 +82,6 @@ export default function CheckOut() {
     alert("Checkout successful");
     navigate("/");
   };
-
-  
 
   return (
     <div>
@@ -121,10 +127,7 @@ export default function CheckOut() {
                 </form>
                 <h4> Your current Address: </h4>
                 <p>
-                  {address.street == "" ||
-                  address.city == "" ||
-                  address.zip == "" ||
-                  address.state == "" ? (
+                  {invalidAddress ? (
                     <p>No valid address entered</p>
                   ) : (
                     <p>
@@ -160,6 +163,12 @@ export default function CheckOut() {
               </div>
             </div>
           </div>
+
+          {payMethod === "paypal" && (
+            <div className="paypal-setting">
+              <PayPalComponent prop = {{checkOutData, cartTotalPrice}} />
+            </div>
+          )}
         </div>
 
         <div className="place-order-container">
@@ -171,27 +180,8 @@ export default function CheckOut() {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }
 
-/*
-const order = {
-  _id: ObjectId,
-  userId: ObjectId,
-  items: [
-    {
-      productId: ObjectId,
-      quantity: Number,
-      price: Number
-    }
-  ],
-  totalAmount: Number,
-  orderDateTime: string,
-  payment: {
-    method: string, //cash, debit, credit
-    amount: number
-  },
-  status: string,
-
-*/

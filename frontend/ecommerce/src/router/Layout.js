@@ -7,6 +7,8 @@ import OrderSummery from "../components/orders/OrderSummery";
 import CheckOut from "../components/checkOut";
 import Profile from "../components/profile/Profile";
 import OrderList from "../components/orders/OrderList";
+import AddReview from "../components/review/AddReview";
+import EditProfile from "../components/profile/EditProfile";
 
 const myRouter = createBrowserRouter([
   {
@@ -39,8 +41,16 @@ const myRouter = createBrowserRouter([
     element: <Profile />,
   },
   {
+    path: "editprofile",
+    element: <EditProfile />,
+  },
+  {
     path: "orders",
     element: <OrderList />,
+  },
+  {
+    path: "product/addreview",
+    element: <AddReview />,
   },
 ]);
 

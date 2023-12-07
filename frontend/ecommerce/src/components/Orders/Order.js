@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/Style.css";
 import OrderDetail from "./OrderDetails";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Order({ order }) {
   const { orderDateTime, totalAmount, items } = order;
@@ -8,19 +9,35 @@ export default function Order({ order }) {
   const [itemList, setItemList] = useState([]);
   const [viewDetail, setViewDetail] = useState(false);
 
+  const navigate = useNavigate();
+
   // const firstItemImage =
   //   items && items.length > 0 && items[0].images && items[0].images.length > 0
   //     ? items[0].images[0]
   //     : null;
 
-  console.log("order: ", order);
-  console.log("items: ", order.items);
+  // console.log("order: ", order);
+  // console.log("items: ", order.items);
 
   useEffect(() => {
     const itemsArray = items;
     if (Array.isArray(itemsArray)) {
-      setItemList(itemsArray);
-      console.log("item List: ", itemsArray);
+      const uniqueItemsArray = itemsArray.reduce((acc, obj) => {
+        const existingObj = acc.find(
+          (item) => item.productId === obj.productId
+        );
+
+        if (!existingObj) {
+          acc.push({ obj, count: 1 });
+        } else {
+          existingObj.count += 1;
+        }
+        return acc;
+      }, []);
+      // console.log("unique items array", uniqueItemsArray);
+
+      setItemList(uniqueItemsArray);
+      console.log("item List: ", uniqueItemsArray);
     }
   }, [order.items]);
 
@@ -28,7 +45,11 @@ export default function Order({ order }) {
     setShowOrderDetail(!showOrderDetail);
   };
 
-  console.log("item lsist", itemList);
+  // console.log("item lsist", itemList);
+
+  // itemList.map((item) => {
+  //   console.log(item.obj._id);
+  // });
 
   return (
     <div className="order-container">
@@ -49,18 +70,23 @@ export default function Order({ order }) {
           <div className="order-detail-container">
             {itemList.map((item) => (
               <div className="item-detail">
-                <p>Name: {item.name}</p>
-                <p>Price: {item.price}</p>
-                {item.images && item.images.length > 0 ? (
+                <p>Name: {item.obj.name}</p>
+                <p>Price: {item.obj.price}</p>
+                <p>Count: {item.count}</p>
+
+                {item.obj.images && item.obj.images.length > 0 ? (
                   <img
-                    src={item.images[0]}
+                    src={item.obj.images[0]}
                     alt="Product"
                     className="product-image"
                   />
                 ) : (
                   ""
                 )}
-                <button className="review-button">Write a Review</button>
+
+                <Link to={{ pathname: "/product/addreview" }} state={{ item }}>
+                  Write a Review
+                </Link>
               </div>
             ))}
           </div>

@@ -45,7 +45,7 @@ export default function Cart() {
             }}
             state={{ cartData }}
           >
-            <button>Button</button>
+            <button>CheckOut</button>
           </Link>
         )}
       </div>
