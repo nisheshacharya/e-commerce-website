@@ -164,24 +164,24 @@ export default function CheckOut() {
             </div>
           </div>
 
-          {payMethod === "paypal" && (
+          {payMethod === "paypal" && !invalidAddress && (
             <div className="paypal-setting">
-              <PayPalComponent prop = {{checkOutData, cartTotalPrice}} />
+              <PayPalComponent
+                prop={{ checkOutData, cartTotalPrice, payMethod }}
+              />
             </div>
           )}
         </div>
 
         <div className="place-order-container">
-          <h3>Place Order</h3>
-          <button onClick={handleCheckOut}>Place order</button>
+          <h3> Order Detail</h3>
+          {/* <button onClick={handleCheckOut}>Place order</button> */}
           <div className="place-order-summery">
             <p>Number of items: {location.state.cartData.length}</p>
             <p> Total Amount: {getCartTotal()} </p>
           </div>
         </div>
       </div>
-      
     </div>
   );
 }
-
