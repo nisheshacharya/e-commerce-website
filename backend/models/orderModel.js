@@ -40,17 +40,17 @@ class Order {
     }
   }
 
-  static async postMultipleOrders(orders){
-    const db = getDb();
-    try{
-    const result = await db.collection('orders').insertMany(orders);
-    console.log("Inserted orders ");
-    }
-    catch(error){
-      console.error("Error while posting orders", error);
-    }
+  // static async postMultipleOrders(orders){
+  //   const db = getDb();
+  //   try{
+  //   const result = await db.collection('orders').insertMany(orders);
+  //   console.log("Inserted orders ");
+  //   }
+  //   catch(error){
+  //     console.error("Error while posting orders", error);
+  //   }
    
-  }
+  // }
 }
 
 module.exports = Order;

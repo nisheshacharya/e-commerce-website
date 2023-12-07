@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../styles/Style.css";
 import { useLocation } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { addOrder } from "../network/network";
+import { useNavigate } from "react-router-dom";
+import GlobalContext from "../context";
 
 export default function CheckOut() {
+  const navigate = useNavigate();
+  const { cartData, setCartData } = useContext(GlobalContext);
   const [checkOutData, setCheckOutData] = useState(0);
   const [payMethod, setPayMethod] = useState("");
+  const [cartTotalPrice, setCartTotalPrice] = useState(0);
   const [address, setAddress] = useState({
     street: "",
     city: "",
@@ -17,15 +24,12 @@ export default function CheckOut() {
   let copyFromLocation = [];
   let cartTotal = 0;
 
-  useEffect(
-    () => {
-      setCheckOutData(location.state);
-      console.log(location.state.cartData);
-      console.log("location.state: ", location.state);
-    },
-    [location.state],
-    [address]
-  );
+  useEffect(() => {
+    setCheckOutData(location.state);
+    setCartTotalPrice(getCartTotal());
+    console.log(location.state.cartData);
+    console.log("location.state: ", location.state);
+  }, [location.state, payMethod, cartTotalPrice]);
 
   const getCartTotal = () => {
     location.state.cartData.map((cartItem) => (cartTotal += cartItem.price));
@@ -35,20 +39,43 @@ export default function CheckOut() {
   const addressOnChange = (e) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
   };
-  const handleAddressSubmit = (e) => {
-    e.preventDefault();
-    console.log(address);
-  };
 
   const handlePaySelect = (e) => {
     setPayMethod(e.target.value);
-    console.log("selected", e.target.value);
+    console.log("selected:", e.target.value);
   };
 
-  const handleCheckOut = () => {
+  const handleCheckOut = (e) => {
+    console.log("checkout clicked");
+
     copyFromLocation = [...location.state.cartData];
-    console.log(copyFromLocation);
+    const userId = jwtDecode(localStorage.getItem("user")).userId;
+    const totalAmount = cartTotalPrice;
+    const orderDateTime = Date.now();
+    const payment = { method: payMethod };
+    console.log(payment);
+    const status = "ordered";
+    const items = checkOutData.cartData;
+    console.log("items: ", items);
+
+    const order = {
+      userId,
+      items,
+      totalAmount,
+      orderDateTime,
+      payment,
+      status,
+    };
+    addOrder(order, localStorage.getItem("user"));
+    localStorage.removeItem("cart");
+    setCartTotalPrice(0);
+    setCheckOutData([]);
+    setCartData([]);
+    alert("Checkout successful");
+    navigate("/");
   };
+
+  
 
   return (
     <div>
@@ -66,7 +93,7 @@ export default function CheckOut() {
                 <h4> Shipping Address</h4>
               </div>
               <div className="shipping-container-body">
-                <form onSubmit={handleAddressSubmit}>
+                <form>
                   <input
                     type="text"
                     placeholder="Street Address"
@@ -91,7 +118,6 @@ export default function CheckOut() {
                     name="zip"
                     onChange={addressOnChange}
                   />
-                  <input type="submit" value="Set Address" />
                 </form>
                 <h4> Your current Address: </h4>
                 <p>

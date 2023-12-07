@@ -13,7 +13,7 @@ function Header() {
 
   useEffect(() => {
     setCartCount(JSON.parse(localStorage.getItem("cart"))?.length);
-   
+
     const decodedToken = jwtDecode(localStorage.getItem("user"));
     console.log(decodedToken.userName);
   }, [cartData]);
@@ -25,7 +25,7 @@ function Header() {
     navigate("/login");
     window.location.reload();
   };
-  const getDecryptedToken = ()=>(jwtDecode(localStorage.getItem("user")))
+  const getDecryptedToken = () => jwtDecode(localStorage.getItem("user"));
 
   return (
     <div className="header-container">
@@ -50,7 +50,12 @@ function Header() {
       >
         <p className="welcome-text">Hello, {getDecryptedToken().userName}!</p>
       </div>
-      <div className="orders-container">
+      <div
+        className="orders-container"
+        onClick={() => {
+          navigate("/orders");
+        }}
+      >
         <p className="orders-text">Your Orders</p>
       </div>
       <div

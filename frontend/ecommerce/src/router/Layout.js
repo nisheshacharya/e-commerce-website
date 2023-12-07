@@ -6,6 +6,7 @@ import Cart from "../components/Cart/Cart";
 import OrderSummery from "../components/orders/OrderSummery";
 import CheckOut from "../components/checkOut";
 import Profile from "../components/profile/Profile";
+import OrderList from "../components/orders/OrderList";
 
 const myRouter = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const myRouter = createBrowserRouter([
   {
     path: "profile",
     element: <Profile />,
+  },
+  {
+    path: "orders",
+    element: <OrderList />,
   },
 ]);
 
