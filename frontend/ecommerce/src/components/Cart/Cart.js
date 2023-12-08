@@ -35,8 +35,11 @@ export default function Cart() {
   return (
     <div>
       <Header />
+      <div className="heading-div">
       <h3>Cart</h3>
+      </div>
       <div className="cart-total">
+        
         <h4> Total- $ {getTotal()}</h4>
         {getTotal() > 0 && (
           <Link
@@ -53,7 +56,7 @@ export default function Cart() {
       {cartData.length <= 0 ? (
         <h3> Cart empty</h3>
       ) : (
-        <div>
+        <div className="cart-item-container">
           {cartData.length > 0
             ? cartData.map((cartProduct) => (
                 <div className="cart-product-container">

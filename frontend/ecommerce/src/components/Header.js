@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import LocalContext from "../context/localContext";
 import { getProductByName } from "../network/network";
+
 function Header() {
   const { cartData, setCartData, state, setState } = useContext(GlobalContext);
   const { products, setProducts } = useContext(LocalContext);
@@ -30,10 +31,8 @@ function Header() {
   const handleSearch = async () => {
     try {
       const res = await getProductByName(searchQuery);
-      console.log("res.data from header", res);
       const toArray = res;
-      console.log(res);
-      console.log(toArray);
+      console.log(" search querry", searchQuery);
 
       if (Array.isArray(toArray)) {
         setProducts(toArray);
@@ -54,7 +53,15 @@ function Header() {
           navigate("/");
         }}
       >
-        <img src="/path/to/your/logo.png" alt="Logo" className="logo" />
+        <img
+          src="https://tse3.mm.bing.net/th?id=OIP.qqjTs7jvKi_6zKhI4sTRjAHaGy&pid=Api&P=0&h=220"
+          alt="Logo"
+          className="logo"
+        />
+      </div>
+
+      <div className="title-container">
+        <h1>OrganicMart </h1>
       </div>
       <div className="search-bar-container">
         <input
@@ -62,13 +69,13 @@ function Header() {
           placeholder="Search..."
           className="search-bar"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            handleSearch();
+          }}
         />
-        <button className="search-button" onClick={handleSearch}>
-          &#128269;
-        </button>
+        <button className="search-button">&#128269;</button>
       </div>
-
       <div
         className="welcome-text-container"
         onClick={() => {

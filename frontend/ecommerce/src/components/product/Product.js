@@ -39,6 +39,8 @@ export default function Product({ product, isAdmin }) {
     <div className="product-container">
       <div className="product-description-container">
         <h2>{product.name}</h2>
+        <p>{product.description}</p>
+        <h5>$ {product.price}</h5>
         <h3>Rating: {averageRating}</h3>
 
         <div>

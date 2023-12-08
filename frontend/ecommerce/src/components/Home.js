@@ -32,6 +32,7 @@ export default function Home() {
       console.error(err);
     }
   };
+
   const filterDeleated = (products) => {
     return products.filter((product) => !product.deleted);
   };
@@ -46,11 +47,13 @@ export default function Home() {
             <button onClick={() => navigate("/addproduct")}>Add Product</button>
           )}
         </div>
-        {products.map((product) => (
-          <div style={{ border: "1px solid black" }}>
-            <Product product={product} isAdmin={role === "admin"} />
-          </div>
-        ))}
+        <div className="product-container">
+          {products.map((product) => (
+            <div key={product.id} className="product-item">
+              <Product product={product} isAdmin={role === "admin"} />
+            </div>
+          ))}
+        </div>
       </div>
     </LocalContext.Provider>
   );
