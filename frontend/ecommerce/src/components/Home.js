@@ -5,12 +5,12 @@ import GlobalContext from "../context";
 import Header from "./Header";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-
-// ... (import statements)
+import LocalContext from "../context/localContext";
 
 export default function Home() {
   const { state, setState, test, setTest } = useContext(GlobalContext);
   const [products, setProducts] = useState([]);
+
   const role = jwtDecode(localStorage.getItem("user")).role;
   const navigate = useNavigate();
 
@@ -37,17 +37,21 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <Header />
-      <h1>Home</h1>
-      {role === "admin" && (
-        <button onClick={() => navigate("/addproduct")}>Add Product</button>
-      )}
-      {products.map((product) => (
-        <div style={{ border: "1px solid black" }}>
-          <Product product={product} isAdmin={role === "admin"} />
+    <LocalContext.Provider value={{ products, setProducts }}>
+      <div>
+        <Header />
+        <div className="heading-div">
+          <h1>Home</h1>
+          {role === "admin" && (
+            <button onClick={() => navigate("/addproduct")}>Add Product</button>
+          )}
         </div>
-      ))}
-    </div>
+        {products.map((product) => (
+          <div style={{ border: "1px solid black" }}>
+            <Product product={product} isAdmin={role === "admin"} />
+          </div>
+        ))}
+      </div>
+    </LocalContext.Provider>
   );
 }

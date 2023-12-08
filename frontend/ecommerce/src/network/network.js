@@ -65,6 +65,20 @@ export async function getProductById(productId) {
   }
 }
 
+export async function getProductByName(name) {
+  const url = "http://localhost:3001/products/results";
+
+  try {
+    const res = await axios.get(`${url}/${name}`);
+
+    console.log("res: ", res);
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching product from id", error);
+    return null;
+  }
+}
 
 // get user by ID
 
@@ -169,7 +183,6 @@ export async function sendEmail(to) {
   }
 }
 
-
 export async function addProduct(productData, token) {
   const url = "http://localhost:3001/products/add";
 
@@ -187,7 +200,7 @@ export async function addProduct(productData, token) {
   }
 }
 
-const BASE_URL = 'http://localhost:3001'; 
+const BASE_URL = "http://localhost:3001";
 
 export const updateProduct = async (productId, productData, token) => {
   try {
@@ -197,16 +210,17 @@ export const updateProduct = async (productId, productData, token) => {
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
 
     return response.data;
   } catch (error) {
-    console.error('Error updating product:', error.response?.data || error.message);
+    console.error(
+      "Error updating product:",
+      error.response?.data || error.message
+    );
     throw error;
   }
 };
-
-

@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../styles/Style.css";
-// import { useNavigate } from "react-router-dom";
 import GlobalContext from "../context";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-
+import LocalContext from "../context/localContext";
+import { getProductByName } from "../network/network";
 function Header() {
   const { cartData, setCartData, state, setState } = useContext(GlobalContext);
+  const { products, setProducts } = useContext(LocalContext);
   const [cartCount, setCartCount] = useState(0);
-  // const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +26,20 @@ function Header() {
     navigate("/login");
     window.location.reload();
   };
+
+  const handleSearch = async () => {
+    try {
+      const res = await getProductByName(searchQuery);
+      console.log("res.data from header", res);
+      if (Array.isArray(res.data)) {
+        setProducts(res.data);
+        console.log("set in products");
+      }
+    } catch (error) {
+      console.error("Error searching for products:", error);
+    }
+  };
+
   const getDecryptedToken = () => jwtDecode(localStorage.getItem("user"));
 
   return (
@@ -38,8 +53,16 @@ function Header() {
         <img src="/path/to/your/logo.png" alt="Logo" className="logo" />
       </div>
       <div className="search-bar-container">
-        <input type="text" placeholder="Search..." className="search-bar" />
-        <button className="search-button">&#128269;</button>
+        <input
+          type="text"
+          placeholder="Search..."
+          className="search-bar"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button className="search-button" onClick={handleSearch}>
+          &#128269;
+        </button>
       </div>
 
       <div

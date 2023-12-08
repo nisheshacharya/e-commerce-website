@@ -37,6 +37,12 @@ button {
   }
 }
 
+.heading-div {
+  align-content: center;
+  margin: auto;
+  align-self: center;
+  text-align: center;
+}
 
 .product-container {
   display: flex;
