@@ -31,8 +31,12 @@ function Header() {
     try {
       const res = await getProductByName(searchQuery);
       console.log("res.data from header", res);
-      if (Array.isArray(res.data)) {
-        setProducts(res.data);
+      const toArray = res;
+      console.log(res);
+      console.log(toArray);
+
+      if (Array.isArray(toArray)) {
+        setProducts(toArray);
         console.log("set in products");
       }
     } catch (error) {
