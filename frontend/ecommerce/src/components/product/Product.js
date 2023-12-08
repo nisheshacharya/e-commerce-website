@@ -1,13 +1,16 @@
 import "../../styles/Style.css";
+
 import { useContext, useEffect, useState } from "react";
 import { getUserName } from "../../network/network";
 import GlobalContext from "../../context";
+import { useNavigate } from "react-router-dom";
 
-export default function Product({ product }) {
+export default function Product({ product, isAdmin }) {
   // console.log("product: ", product);
   const [averageRating, setAverageRating] = useState(null);
   const [showReview, setShowReview] = useState(false);
   const { cartData, setCartData } = useContext(GlobalContext);
+  const navigate = useNavigate();
 
   let totalRating = 0;
   useEffect(() => {
@@ -48,10 +51,16 @@ export default function Product({ product }) {
           ))}
         </div>
 
-        <button onClick={addToCart}>Add to cart</button>
+        {!isAdmin && <button onClick={addToCart}>Add to cart</button>}
         <button onClick={toggleReview}>
           {showReview ? "Hide Review" : "Show Review"}
         </button>
+
+        {isAdmin && (
+          <button onClick={() => navigate(`/edit-product/${product._id}`)}>
+            Edit Product
+          </button>
+        )}
       </div>
 
       {showReview && (

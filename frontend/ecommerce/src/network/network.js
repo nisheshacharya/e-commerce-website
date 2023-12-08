@@ -52,6 +52,20 @@ export async function getProducts(token) {
   }
 }
 
+export async function getProductById(productId) {
+  const url = "http://localhost:3001/products";
+
+  try {
+    const res = await axios.get(`${url}/${productId}`);
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching product from id", error);
+    return null;
+  }
+}
+
+
 // get user by ID
 
 export async function getUserName(userId) {
@@ -154,3 +168,45 @@ export async function sendEmail(to) {
     return null;
   }
 }
+
+
+export async function addProduct(productData, token) {
+  const url = "http://localhost:3001/products/add";
+
+  try {
+    const res = await axios.post(url, productData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return res.data;
+  } catch (error) {
+    console.error("Error adding product", error);
+    return null;
+  }
+}
+
+const BASE_URL = 'http://localhost:3001'; 
+
+export const updateProduct = async (productId, productData, token) => {
+  try {
+    const response = await axios.put(
+      `${BASE_URL}/products/${productId}`,
+      productData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('Error updating product:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
+

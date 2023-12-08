@@ -102,4 +102,72 @@ exports.addReviewToProduct = async (req, res) => {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
+  const Product = require("../models/productModel");
+
+  exports.addProduct = async (req, res) => {
+    const {
+      name,
+      description,
+      price,
+      quantity,
+      images,
+      category,
+      averageRating,
+      reviews,
+    } = req.body;
+
+    let product = new Product(
+      name,
+      description,
+      price,
+      quantity,
+      images,
+      category,
+      averageRating,
+      reviews
+    );
+
+    try {
+      await product.saveProduct();
+      res
+        .status(200)
+        .json({ success: true, message: "Product added successfully" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
+  };
+};
+
+exports.updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const { name, description, price, quantity, category, deleted } = req.body;
+
+  try {
+    const existingProduct = await Product.findByProductId(id);
+    if (!existingProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const updatedProduct = await Product.updateProduct(
+      id,
+      name,
+      description,
+      price,
+      quantity,
+      category,
+      deleted
+    );
+
+    if (!updatedProduct) {
+      return res
+        .status(500)
+        .json({ success: false, message: "Unable to update product" });
+    }
+
+    res.status(200).json({ success: true, data: updatedProduct });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
 };

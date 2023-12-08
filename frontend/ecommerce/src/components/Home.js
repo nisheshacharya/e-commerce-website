@@ -3,10 +3,16 @@ import Product from "./product/Product";
 import { getProducts } from "../network/network";
 import GlobalContext from "../context";
 import Header from "./Header";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+
+// ... (import statements)
 
 export default function Home() {
   const { state, setState, test, setTest } = useContext(GlobalContext);
   const [products, setProducts] = useState([]);
+  const role = jwtDecode(localStorage.getItem("user")).role;
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProductsArray(state.user);
@@ -16,19 +22,30 @@ export default function Home() {
   const getProductsArray = async (token) => {
     try {
       const res = await getProducts(token);
-      setProducts(res.data);
+
+      const unfiltered = res.data;
+      const filtered = filterDeleated(unfiltered);
+
+      setProducts(filtered);
+      console.log("products: ", res.data);
     } catch (err) {
       console.error(err);
     }
+  };
+  const filterDeleated = (products) => {
+    return products.filter((product) => !product.deleted);
   };
 
   return (
     <div>
       <Header />
       <h1>Home</h1>
+      {role === "admin" && (
+        <button onClick={() => navigate("/addproduct")}>Add Product</button>
+      )}
       {products.map((product) => (
         <div style={{ border: "1px solid black" }}>
-          <Product product={product} />
+          <Product product={product} isAdmin={role === "admin"} />
         </div>
       ))}
     </div>

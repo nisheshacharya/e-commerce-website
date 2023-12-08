@@ -82,7 +82,43 @@ class Product {
       );
       throw error;
     }
+    
+  }static async updateProduct(
+    productId,
+    name,
+    description,
+    price,
+    quantity,
+    category,
+    deleted
+  ) {
+    const db = getDb();
+  
+    try {
+      const updatedProduct = await db.collection("products").findOneAndUpdate(
+        { _id: new ObjectId(productId) },
+        {
+          $set: {
+            name,
+            description,
+            price,
+            quantity,
+            category,
+            deleted,
+          },
+        },
+        { returnDocument: "after" }
+      );
+  
+      return updatedProduct.value;
+    } catch (error) {
+      console.error("Error occurred while updating the product", error);
+      throw error;
+    }
   }
+
+
+
 }
 
 module.exports = Product;

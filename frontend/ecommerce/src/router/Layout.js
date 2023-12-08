@@ -9,6 +9,8 @@ import Profile from "../components/profile/Profile";
 import OrderList from "../components/orders/OrderList";
 import AddReview from "../components/review/AddReview";
 import EditProfile from "../components/profile/EditProfile";
+import AddProduct from "../components/product/AddProduct";
+import EditProduct from "../components/product/EditProduct";
 
 const myRouter = createBrowserRouter([
   {
@@ -52,6 +54,15 @@ const myRouter = createBrowserRouter([
     path: "product/addreview",
     element: <AddReview />,
   },
+  {
+    path: "addproduct",
+    element: <AddProduct />,
+  },
+  {
+    path:"edit-product/:productId",
+    element: <EditProduct/> 
+  }
+
 ]);
 
 export default myRouter;

@@ -4,12 +4,14 @@ img {
   margin: auto;
   padding: 10px; 
 }
+
 input {
   border: solid rgb(3, 3, 107) 2px;
   border-style:double;
   border-radius: 5%;
   margin: 5px;
   background-color: #efecec;
+  max-width: 80%;
 }
 
 input:hover {
@@ -425,4 +427,13 @@ button {
 button:hover {
   background-color: #2874f8;
 }
+/* Add Product */
 
+.add-product-container {
+  max-width: 50%;
+  margin: auto;
+  border: 1px solid gray;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
