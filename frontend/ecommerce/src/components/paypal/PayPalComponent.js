@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { addOrder, sendEmail } from "../../network/network";
+import { addOrder, sendEmail, updateProductQuantity } from "../../network/network";
 import GlobalContext from "../../context";
 
 export default function PayPalComponent(prop) {
@@ -28,13 +28,32 @@ export default function PayPalComponent(prop) {
   };
 
   console.log(order);
+  console.log("item, ", items);
 
   useEffect(() => {
     console.log(prop);
     console.log(prop.prop.cartTotalPrice);
     console.log(prop.prop.checkOutData.cartData);
-    // console.log(prop.prop)
+    
   });
+  const updateQuantities = async () => {
+    try {
+      
+      for (const item of items) {
+        const { productId, quantity } = item;
+
+        
+        await updateProductQuantity(productId, quantity - 1, localStorage.getItem("user"));
+      }
+    } catch (error) {
+      console.error("Error updating product quantities:", error);
+      throw error;
+    }
+  };
+
+
+
+
 
   const onSuccess = (details, data) => {
     sendEmail(userEmail);

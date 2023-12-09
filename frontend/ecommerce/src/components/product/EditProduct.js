@@ -55,7 +55,7 @@ export default function EditProduct() {
   return (
     <div>
       <Header />
-      <div className="edit-product-container">
+      <div className="login-container">
         <h2>Edit Product</h2>
         <form onSubmit={handleSubmit}>
           <label>

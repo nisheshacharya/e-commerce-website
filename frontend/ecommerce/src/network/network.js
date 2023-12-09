@@ -241,3 +241,28 @@ export const updateProduct = async (productId, productData, token) => {
     throw error;
   }
 };
+
+// Update product quantity
+export const updateProductQuantity = async (productId, newQuantity, token) => {
+  try {
+    const response = await axios.put(
+      `${BASE_URL}/products/${productId}`,
+      { quantity: newQuantity }, 
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error updating product quantity:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
+

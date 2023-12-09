@@ -18,9 +18,10 @@ export default function Home() {
   useEffect(() => {
     if (state.user === null) {
       setState({ user: localStorage.getItem("user") });
+      console.log("state saved");
     }
     getProductsArray(state.user);
-    console.log("state: ", state);
+    console.log("state: ", state.user);
   }, []);
 
   const getProductsArray = async (token) => {

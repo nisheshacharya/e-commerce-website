@@ -20,6 +20,9 @@ input:hover {
 img:hover {
   max-width: 175px
 }
+h1 {
+  text-align: center;
+}
 
 button {
   background-color: #4285f4;
@@ -40,6 +43,28 @@ button {
 .background  {
   background-image: url("https://i.pinimg.com/originals/67/68/80/6768809b03661b16e3b548fca544c8b5.gif");
 }
+
+.login-container {
+  max-width: 40%;
+  margin: auto;
+}
+
+.button {
+  background-color: #4285f4;
+  color: #fff;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+
+  &:hover {
+    background-color: #2874f8;
+  }
+}
+
 
 .heading-div {
   align-content: center;

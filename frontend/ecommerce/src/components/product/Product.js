@@ -6,10 +6,9 @@ import GlobalContext from "../../context";
 import { useNavigate } from "react-router-dom";
 
 export default function Product({ product, isAdmin }) {
- 
   const [averageRating, setAverageRating] = useState(null);
   const [showReview, setShowReview] = useState(false);
-  const {state, setState, cartData, setCartData } = useContext(GlobalContext);
+  const { state, setState, cartData, setCartData } = useContext(GlobalContext);
   const navigate = useNavigate();
 
   let totalRating = 0;
@@ -45,7 +44,8 @@ export default function Product({ product, isAdmin }) {
           <img src={product.images[0]} />
           <p>{product.description}</p>
           <p>$ {product.price}</p>
-          <h5>Rating: {averageRating}</h5>
+
+          {averageRating > 0 && <h5>Rating: {averageRating}</h5>}
         </div>
 
         {!isAdmin && <button onClick={addToCart}>Add to cart</button>}

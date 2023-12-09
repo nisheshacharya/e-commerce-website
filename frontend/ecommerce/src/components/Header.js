@@ -28,19 +28,24 @@ function Header() {
     window.location.reload();
   };
 
-  const handleSearch = async () => {
-    try {
-      const res = await getProductByName(searchQuery);
-      const toArray = res;
-      console.log(" search querry", searchQuery);
+  // const handleSearch = async () => {
+  //   try {
+  //     const res = await getProductByName(searchQuery);
+  //     const toArray = res;
+  //     console.log(" search querry", searchQuery);
 
-      if (Array.isArray(toArray)) {
-        setProducts(toArray);
-        console.log("set in products");
-      }
-    } catch (error) {
-      console.error("Error searching for products:", error);
-    }
+  //     if (Array.isArray(toArray)) {
+  //       setProducts(toArray);
+  //       console.log("set in products");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error searching for products:", error);
+  //   }
+  // };
+
+  const handleSearch = () => {
+    const productArray = [...products];
+    console.log(productArray);
   };
 
   const getDecryptedToken = () => jwtDecode(localStorage.getItem("user"));
@@ -74,7 +79,7 @@ function Header() {
             handleSearch();
           }}
         />
-        <button className="search-button">&#128269;</button>
+        <button className="search-button" onClick={handleSearch}>&#128269;</button>
       </div>
       <div
         className="welcome-text-container"

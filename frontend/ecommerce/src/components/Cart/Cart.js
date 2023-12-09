@@ -37,7 +37,7 @@ export default function Cart() {
     <div className="background">
       <Header />
       <div className="heading-div">
-        <h3>Cart</h3>
+        <h1>Your Cart Items</h1>
       </div>
       <div className="cart-items-container">
         <div className="cart-total">
@@ -56,7 +56,12 @@ export default function Cart() {
 
         <div className="cart-second-half">
           {cartData.length <= 0 ? (
-            <h3> Cart empty</h3>
+            <div
+              style={{ height: "300px", color: "maroon", textAlign: "center" }}
+            >
+              <h1> Opps! Cart Empty....</h1>
+              <h2>Add something first</h2>
+            </div>
           ) : (
             <div className="cart-item-container">
               {cartData.length > 0

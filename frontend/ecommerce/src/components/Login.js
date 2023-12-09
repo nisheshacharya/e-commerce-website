@@ -40,6 +40,7 @@ export default function Login(e) {
   return (
     <div>
       <h1>Login</h1>
+      <div className="login-container">
       <form onSubmit={handleLogin}>
         <input
           placeholder="email"
@@ -51,12 +52,14 @@ export default function Login(e) {
           placeholder="password"
           type="password"
           name="password"
-          onChange={setLoginDetails}
+          onChange={setLoginDetails} 
+          
         />
-        <input type="submit" value="login" />
+        <input type="submit" value="login" className="button" />
       </form>
       <p>Don't have an account? </p>
       <button onClick={goToSignup}>Signup</button>
+      </div>
     </div>
   );
 }
