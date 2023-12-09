@@ -6,6 +6,7 @@ import Header from "./Header";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import LocalContext from "../context/localContext";
+import Footer from "./Footer";
 
 export default function Home() {
   const { state, setState, test, setTest } = useContext(GlobalContext);
@@ -15,8 +16,11 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (state.user === null) {
+      setState({ user: localStorage.getItem("user") });
+    }
     getProductsArray(state.user);
-    console.log("state: ", state.user);
+    console.log("state: ", state);
   }, []);
 
   const getProductsArray = async (token) => {
@@ -39,10 +43,13 @@ export default function Home() {
 
   return (
     <LocalContext.Provider value={{ products, setProducts }}>
-      <div>
+      <div className="background">
         <Header />
         <div className="heading-div">
-          <h1>Home</h1>
+          <h1 style={{ color: "maroon" }}>
+            {" "}
+            <i> Happy Holidays! here is what we have for you... </i>{" "}
+          </h1>
           {role === "admin" && (
             <button onClick={() => navigate("/addproduct")}>Add Product</button>
           )}
@@ -55,6 +62,7 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <Footer />
     </LocalContext.Provider>
   );
 }

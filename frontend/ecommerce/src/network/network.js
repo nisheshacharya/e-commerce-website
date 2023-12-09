@@ -112,6 +112,21 @@ export async function getAllOrders(token) {
   }
 }
 
+export async function pullOrdersByUsers(userId, token) {
+  const url = `http://localhost:3001/orders/${userId}`;
+  try {
+    const res = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Error getting orders");
+    return null;
+  }
+}
+
 // add order
 
 export async function addOrder(order, token) {
@@ -183,6 +198,7 @@ export async function sendEmail(to) {
   }
 }
 
+//add product
 export async function addProduct(productData, token) {
   const url = "http://localhost:3001/products/add";
 
@@ -202,6 +218,7 @@ export async function addProduct(productData, token) {
 
 const BASE_URL = "http://localhost:3001";
 
+//update product
 export const updateProduct = async (productId, productData, token) => {
   try {
     const response = await axios.put(

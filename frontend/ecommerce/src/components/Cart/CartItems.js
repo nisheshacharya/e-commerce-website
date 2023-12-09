@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import GlobalContext from "../../context";
+import "../../styles/Style.css";
 
 export default function CartItems({ cartProduct }) {
   const { cartData, setCartData, totalAmount, setTotalAmount } =
@@ -31,10 +32,14 @@ export default function CartItems({ cartProduct }) {
         <div>
           <h3>{cartProduct.name}</h3>
           <h5>{cartProduct.description}</h5>
-          <div className="cart-image-container">
+          <div className="cart-image-container-small">
             {cartProduct.images.map((image, index) => (
               <div className="cart-image-mapped-container" key={index}>
-                <img src={image} alt={`Product Image ${index + 1}`} />
+                <img
+                  src={image}
+                  alt={`Product Image ${index + 1}`}
+                  className="cart-image-small"
+                />
               </div>
             ))}
           </div>

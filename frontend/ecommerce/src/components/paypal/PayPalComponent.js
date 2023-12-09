@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { addOrder, sendEmail } from "../../network/network";
+import GlobalContext from "../../context";
 
 export default function PayPalComponent(prop) {
   const navigate = useNavigate();
+  const { cartData, setCartData } = useContext(GlobalContext);
   console.log(prop.prop);
 
   const items = prop.prop.checkOutData.cartData;
@@ -38,8 +40,11 @@ export default function PayPalComponent(prop) {
     sendEmail(userEmail);
     addOrder(order, localStorage.getItem("user"));
     localStorage.removeItem("cart");
+    setCartData([]);
     alert("Checkout successful");
-    navigate("/");
+    console.log(details);
+    console.log(data);
+    navigate("/orders");
   };
 
   const onCancel = (data) => {

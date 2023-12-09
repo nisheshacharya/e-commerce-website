@@ -1,8 +1,8 @@
 img {
-  max-width: 200px; 
+  max-width: 150px; 
   height: auto;
   margin: auto;
-  padding: 10px; 
+  padding: 5px; 
 }
 
 input {
@@ -18,13 +18,13 @@ input:hover {
   border: solid rgb(3, 3, 107) 4px;
 }
 img:hover {
-  max-width: 250px;
+  max-width: 175px
 }
 
 button {
   background-color: #4285f4;
   color: #fff;
-  padding: 10px 15px;
+  padding: 10px;
   font-size: 1rem;
   border: none;
   border-radius: 4px;
@@ -35,6 +35,10 @@ button {
   &:hover {
     background-color: #2874f8;
   }
+}
+
+.background  {
+  background-image: url("https://i.pinimg.com/originals/67/68/80/6768809b03661b16e3b548fca544c8b5.gif");
 }
 
 .heading-div {
@@ -48,14 +52,19 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 8px; /* Adjust the gap as needed */
+  margin-left: 40px;
 }
 
-.product-item {
-  flex: 1 1  calc(40% - 16px); /* Two products in a row with a gap of 16px */
-  box-sizing: border-box;
-  border: 1px solid rgb(241, 241, 241);
-  background-color: #deecf5;
-}
+  .product-item {
+    flex: 1 1 calc(30% - 8px); /* Three products in a row with a gap of 16px */
+    box-sizing:unset;
+    max-width: 18%;
+    border: 1px solid rgb(241, 241, 241);
+    background-color: #deecf5;
+    margin-bottom: 16px; /* Add margin-bottom to create space between rows */
+    border-radius: 5%;
+  }
+  
 
 
 .product-description-container {
@@ -81,24 +90,45 @@ border-radius: 5%;
 }
 
 .cart-total {
-  align-content: center;
+  flex: 0 0 20%; 
+  border: 2px solid gray;
+  max-height: 150px;
+  border-radius: 4%;
+  margin-left: 10px;
+  color: #1621fc;
+  background: rgb(225, 228, 228);
   text-align: center;
+ 
 }
 
-.cart-image-container {
+.cart-items-container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 30%;
+}
+
+.cart-second-half {
+  flex: 0 0 80%;
+}
+
+
+
+
+
+.cart-image-container-small {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .cart-image-mapped-container {
-  display: flex;
-  flex-direction: column;
-  margin-right: 20px; /* Adjusted margin */
+ 
+  box-sizing: border-box;
+  margin: 4px; /* Adjusted margin */
 }
 
-/* Header */
+.cart-image-small {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Added border-radius for rounded corners */
+}
 
 .header-container {
   height: 100px; /* Increased height */
@@ -463,4 +493,37 @@ button:hover {
   padding: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+/* Footer */
+/* Add this to your existing Style.css file or create a new one for footer styling */
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-section {
+  max-width: 300px;
+}
+
+.footer h3 {
+  font-size: 1.5rem;
+}
+
+.footer p {
+  margin: 8px 0;
+}
+
+.footer-bottom {
+  margin-top: 20px;
+  text-align: center;
+  padding-top: 10px;
+  background-color: #222;
 }

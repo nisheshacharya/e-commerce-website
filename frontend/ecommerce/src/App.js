@@ -19,6 +19,7 @@ function App() {
                 {state?.user ? <RouterProvider router={myRouter}  /> : <RouterProvider router={mySignupRouter} />}
             </div> */}
             <CheckingCom />
+            
         </GlobalContext.Provider>
     );
     

@@ -13,9 +13,7 @@ class User {
   async save() {
     const db = getDb();
 
-    const existingUser = await db
-      .collection("users")
-      .findOne({ email: this.email });
+    const existingUser = await db.collection("users").findOne({ email: this.email });
 
     if (existingUser) {
       throw new Error(

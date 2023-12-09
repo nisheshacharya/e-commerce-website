@@ -64,14 +64,12 @@ exports.loginUser = async (req, res) => {
       }
     );
 
-    res
-      .status(200)
-      .json({
-        token,
-        userId: user._id,
-        userName: user.userName,
-        success: true,
-      });
+    res.status(200).json({
+      token,
+      userId: user._id,
+      userName: user.userName,
+      success: true,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal server error." });

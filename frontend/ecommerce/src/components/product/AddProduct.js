@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import "../../styles/Style.css";
 import Header from "../Header";
 import { addProduct } from "../../network/network";
+import { useNavigate } from "react-router-dom";
 
 export default function AddProduct() {
+  const navigate = useNavigate();
   const token = localStorage.getItem("user");
+  const [currentImage, setCurrentImage] = useState("");
   const [productData, setProductData] = useState({
     name: "",
     description: "",
@@ -28,6 +31,7 @@ export default function AddProduct() {
       const reader = new FileReader();
 
       reader.onloadend = () => {
+        setCurrentImage(reader.result);
         newImages.push(reader.result);
         setProductData({ ...productData, images: newImages });
       };
@@ -52,6 +56,7 @@ export default function AddProduct() {
       category: "",
       image: null,
     });
+    navigate("/");
   };
 
   return (
@@ -82,13 +87,13 @@ export default function AddProduct() {
           <label>
             Price:
             <input
-              type="text"
+              type="number"
               name="price"
-              value={productData.price}
+              value={parseFloat(productData.price)}
               onChange={handleChange}
             />
           </label>
-          <br />
+
           <label>
             Quantity:
             <input
@@ -98,7 +103,7 @@ export default function AddProduct() {
               onChange={handleChange}
             />
           </label>
-          <br />
+
           <label>
             Category:
             <input
@@ -108,12 +113,13 @@ export default function AddProduct() {
               onChange={handleChange}
             />
           </label>
-          <br />
+
           <label>
             Image:
             <input type="file" accept="image/*" onChange={handleImageChange} />
           </label>
-          <br />
+          <div>{currentImage !== "" && <img src={currentImage}></img>}</div>
+
           <button type="submit">Add Product</button>
         </form>
       </div>

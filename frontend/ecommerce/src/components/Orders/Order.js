@@ -2,22 +2,17 @@ import React, { useState, useEffect } from "react";
 import "../../styles/Style.css";
 import OrderDetail from "./OrderDetails";
 import { useNavigate, Link } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 export default function Order({ order }) {
-  const { orderDateTime, totalAmount, items } = order;
+  const { orderDateTime, totalAmount, items, state, setState } = order;
   const [showOrderDetail, setShowOrderDetail] = useState(false);
   const [itemList, setItemList] = useState([]);
   const [viewDetail, setViewDetail] = useState(false);
 
   const navigate = useNavigate();
 
-  // const firstItemImage =
-  //   items && items.length > 0 && items[0].images && items[0].images.length > 0
-  //     ? items[0].images[0]
-  //     : null;
-
-  // console.log("order: ", order);
-  // console.log("items: ", order.items);
+  
 
   useEffect(() => {
     const itemsArray = items;
@@ -45,11 +40,7 @@ export default function Order({ order }) {
     setShowOrderDetail(!showOrderDetail);
   };
 
-  // console.log("item lsist", itemList);
-
-  // itemList.map((item) => {
-  //   console.log(item.obj._id);
-  // });
+  
 
   return (
     <div className="order-container">
@@ -60,7 +51,7 @@ export default function Order({ order }) {
           </p>
           <p>Number of items: {Array.isArray(items) ? items.length : 0}</p>
           <p className="total-amount">
-            Total Amount: ${totalAmount.toFixed(2)}
+            Total Amount: ${parseFloat(totalAmount).toFixed(2)}
           </p>
           <button className="view-order-button" onClick={handleViewOrderDetail}>
             {!showOrderDetail ? "View Order" : "Hide Order"}

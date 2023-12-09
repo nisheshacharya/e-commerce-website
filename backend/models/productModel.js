@@ -56,12 +56,14 @@ class Product {
     return db.collection("products").find({}).toArray();
   }
 
-  static async addReviewToProduct(productId, userId, text, rating) {
+  static async addReviewToProduct(id, userId, text, rating) {
     const db = getDb();
+    const newId = new ObjectId(id);
+    console.log(newId);
 
     try {
       const updatedProduct = await db.collection("products").findOneAndUpdate(
-        { _id: new ObjectId(productId) },
+        { _id: new ObjectId(id) },
         {
           $push: {
             reviews: {
@@ -73,8 +75,9 @@ class Product {
         },
         { returnDocument: "after" }
       );
+      console.log(updatedProduct);
 
-      return updatedProduct.value;
+      return updatedProduct;
     } catch (error) {
       console.error(
         "Error occurred while adding a review to the product",
@@ -82,8 +85,9 @@ class Product {
       );
       throw error;
     }
-    
-  }static async updateProduct(
+  }
+
+  static async updateProduct(
     productId,
     name,
     description,
@@ -93,7 +97,7 @@ class Product {
     deleted
   ) {
     const db = getDb();
-  
+
     try {
       const updatedProduct = await db.collection("products").findOneAndUpdate(
         { _id: new ObjectId(productId) },
@@ -109,16 +113,13 @@ class Product {
         },
         { returnDocument: "after" }
       );
-  
+
       return updatedProduct.value;
     } catch (error) {
       console.error("Error occurred while updating the product", error);
       throw error;
     }
   }
-
-
-
 }
 
 module.exports = Product;

@@ -3,6 +3,7 @@ import CartItems from "./CartItems";
 import GlobalContext from "../../context";
 import Header from "../Header";
 import { Link } from "react-router-dom";
+import Footer from "../Footer";
 
 export default function Cart() {
   const { cartData, setCartData, totalAmount, setTotalAmount } =
@@ -19,8 +20,8 @@ export default function Cart() {
       console.log("cart data from cart ", cartData);
       setCartData(localCartData);
       copyLocalData.forEach((item) => (total += item.price));
-      setTotalAmount(total.toFixed(2));
-      console.log("total amount set: ", total.toFixed(2));
+      setTotalAmount(total);
+      console.log("total amount set: ", total);
     }
   }, [totalAmount]);
 
@@ -28,52 +29,52 @@ export default function Cart() {
     let tAmount = 0;
     let copyCartData = [...cartData];
     copyCartData.map((item) => (tAmount += item.price));
-    tAmount = tAmount.toFixed(2);
+
     return tAmount;
   };
 
   return (
-    <div>
+    <div className="background">
       <Header />
       <div className="heading-div">
-      <h3>Cart</h3>
+        <h3>Cart</h3>
       </div>
-      <div className="cart-total">
-        
-        <h4> Total- $ {getTotal()}</h4>
-        {getTotal() > 0 && (
-          <Link
-            to={{
-              pathname: "/checkout",
-            }}
-            state={{ cartData }}
-          >
-            <button>CheckOut</button>
-          </Link>
-        )}
-      </div>
-
-      {cartData.length <= 0 ? (
-        <h3> Cart empty</h3>
-      ) : (
-        <div className="cart-item-container">
-          {cartData.length > 0
-            ? cartData.map((cartProduct) => (
-                <div className="cart-product-container">
-                  <CartItems cartProduct={cartProduct} />
-                </div>
-              ))
-            : localCartData.map((cartProduct) => (
-                <div className="cart-product-container">
-                  <CartItems cartProduct={cartProduct} />
-                </div>
-              ))}
+      <div className="cart-items-container">
+        <div className="cart-total">
+          <h4> Total- $ {getTotal()}</h4>
+          {getTotal() > 0 && (
+            <Link
+              to={{
+                pathname: "/checkout",
+              }}
+              state={{ cartData }}
+            >
+              <button>CheckOut</button>
+            </Link>
+          )}
         </div>
-      )}
-      <div className="cart-total">
-        <h4> Total- $ {getTotal()}</h4>
-        {getTotal() > 0 && <button>Checkout</button>}
+
+        <div className="cart-second-half">
+          {cartData.length <= 0 ? (
+            <h3> Cart empty</h3>
+          ) : (
+            <div className="cart-item-container">
+              {cartData.length > 0
+                ? cartData.map((cartProduct) => (
+                    <div className="cart-product-container">
+                      <CartItems cartProduct={cartProduct} />
+                    </div>
+                  ))
+                : localCartData.map((cartProduct) => (
+                    <div className="cart-product-container">
+                      <CartItems cartProduct={cartProduct} />
+                    </div>
+                  ))}
+            </div>
+          )}
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
