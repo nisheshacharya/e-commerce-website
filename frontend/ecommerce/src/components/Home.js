@@ -11,6 +11,7 @@ import Footer from "./Footer";
 export default function Home() {
   const { state, setState, test, setTest } = useContext(GlobalContext);
   const [products, setProducts] = useState([]);
+  const [productsCopy, setProductsCopy] = useState([]);
 
   const role = jwtDecode(localStorage.getItem("user")).role;
   const navigate = useNavigate();
@@ -32,7 +33,9 @@ export default function Home() {
       const filtered = filterDeleated(unfiltered);
 
       setProducts(filtered);
-      console.log("products: ", res.data);
+      setProductsCopy(filtered);
+
+      // console.log("products: ", res.data);
     } catch (err) {
       console.error(err);
     }
@@ -43,7 +46,7 @@ export default function Home() {
   };
 
   return (
-    <LocalContext.Provider value={{ products, setProducts }}>
+    <LocalContext.Provider value={{ products, setProducts, productsCopy }}>
       <div className="background">
         <Header />
         <div className="heading-div">

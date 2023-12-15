@@ -8,7 +8,7 @@ import { getProductByName } from "../network/network";
 
 function Header() {
   const { cartData, setCartData, state, setState } = useContext(GlobalContext);
-  const { products, setProducts } = useContext(LocalContext);
+  const { products, setProducts, productsCopy } = useContext(LocalContext);
   const [cartCount, setCartCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -42,10 +42,24 @@ function Header() {
   //     console.error("Error searching for products:", error);
   //   }
   // };
+  // console.log("products copy ", productsCopy);
+  // console.log("products ", products);
 
   const handleSearch = () => {
-    const productArray = [...products];
-    console.log(productArray);
+    const productArray = productsCopy;
+    setProducts(productArray);
+
+    if (searchQuery.length > 0 && searchQuery.trim() !== "") {
+      const filtered = productArray.filter((elem) =>
+        elem.name?.includes(searchQuery)
+      );
+      console.log("search querry ", searchQuery);
+      setProducts(filtered);
+    } else {
+      setProducts(productArray);
+    }
+    console.log("product Array", productArray);
+    console.log("products", products);
   };
 
   const getDecryptedToken = () => jwtDecode(localStorage.getItem("user"));
@@ -76,10 +90,11 @@ function Header() {
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value);
-            handleSearch();
           }}
         />
-        <button className="search-button" onClick={handleSearch}>&#128269;</button>
+        <button className="search-button" onClick={handleSearch}>
+          &#128269;
+        </button>
       </div>
       <div
         className="welcome-text-container"

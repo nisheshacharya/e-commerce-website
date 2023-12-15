@@ -2,7 +2,11 @@ import React, { useContext, useEffect } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { addOrder, sendEmail, updateProductQuantity } from "../../network/network";
+import {
+  addOrder,
+  sendEmail,
+  updateProductQuantity,
+} from "../../network/network";
 import GlobalContext from "../../context";
 
 export default function PayPalComponent(prop) {
@@ -11,7 +15,7 @@ export default function PayPalComponent(prop) {
   console.log(prop.prop);
 
   const items = prop.prop.checkOutData.cartData;
-  const totalAmount = prop.prop.cartTotalPrice.toFixed(2);
+  const totalAmount = prop.prop.cartTotalPrice;
   const userId = jwtDecode(localStorage.getItem("user")).userId;
   const userEmail = jwtDecode(localStorage.getItem("user")).email;
   const payment = { method: prop.prop.payMethod };
@@ -34,26 +38,23 @@ export default function PayPalComponent(prop) {
     console.log(prop);
     console.log(prop.prop.cartTotalPrice);
     console.log(prop.prop.checkOutData.cartData);
-    
   });
   const updateQuantities = async () => {
     try {
-      
       for (const item of items) {
         const { productId, quantity } = item;
 
-        
-        await updateProductQuantity(productId, quantity - 1, localStorage.getItem("user"));
+        await updateProductQuantity(
+          productId,
+          quantity - 1,
+          localStorage.getItem("user")
+        );
       }
     } catch (error) {
       console.error("Error updating product quantities:", error);
       throw error;
     }
   };
-
-
-
-
 
   const onSuccess = (details, data) => {
     sendEmail(userEmail);
