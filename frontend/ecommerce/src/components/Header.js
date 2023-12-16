@@ -28,23 +28,6 @@ function Header() {
     window.location.reload();
   };
 
-  // const handleSearch = async () => {
-  //   try {
-  //     const res = await getProductByName(searchQuery);
-  //     const toArray = res;
-  //     console.log(" search querry", searchQuery);
-
-  //     if (Array.isArray(toArray)) {
-  //       setProducts(toArray);
-  //       console.log("set in products");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error searching for products:", error);
-  //   }
-  // };
-  // console.log("products copy ", productsCopy);
-  // console.log("products ", products);
-
   const handleSearch = () => {
     const productArray = productsCopy;
     setProducts(productArray);
@@ -69,6 +52,7 @@ function Header() {
       <div
         className="logo-container"
         onClick={() => {
+          // setProducts(productsCopy);
           navigate("/");
         }}
       >

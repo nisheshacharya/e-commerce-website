@@ -22,7 +22,7 @@ export default function Home() {
       console.log("state saved");
     }
     getProductsArray(state.user);
-    console.log("state: ", state.user);
+    // console.log("state: ", state.user);
   }, []);
 
   const getProductsArray = async (token) => {
@@ -34,8 +34,6 @@ export default function Home() {
 
       setProducts(filtered);
       setProductsCopy(filtered);
-
-      // console.log("products: ", res.data);
     } catch (err) {
       console.error(err);
     }
@@ -43,6 +41,28 @@ export default function Home() {
 
   const filterDeleated = (products) => {
     return products.filter((product) => !product.deleted);
+  };
+
+  const sortBy = (event) => {
+    console.log("selected");
+    console.log(event.target.value);
+
+    if (event.target.value === "Name") {
+      const sorted = [...products].sort((a, b) => a.name.localeCompare(b.name));
+      // console.log(sorted);
+      setProducts(sorted);
+    }
+    if (event.target.value === "Price") {
+      const sorted = [...products].sort((a, b) => a.price - b.price);
+      setProducts(sorted);
+      console.log(sorted);
+    }
+    if (event.target.value === "Category") {
+      const sorted = [...products].sort((a, b) =>
+        a.category.localeCompare(b.category)
+      );
+      setProducts(sorted);
+    }
   };
 
   return (
@@ -57,6 +77,15 @@ export default function Home() {
           {role === "admin" && (
             <button onClick={() => navigate("/addproduct")}>Add Product</button>
           )}
+        </div>
+        <div className="select-button">
+          Sort By:{" "}
+          <select onChange={sortBy}>
+            <option></option>
+            <option>Price</option>
+            <option>Name</option>
+            <option>Category</option>
+          </select>
         </div>
         <div className="product-container">
           {products.map((product) => (
