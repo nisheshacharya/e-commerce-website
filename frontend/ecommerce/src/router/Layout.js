@@ -3,7 +3,7 @@ import Home from "../components/Home";
 
 import Cart from "../components/Cart/Cart";
 
-import OrderSummery from "../components/orders/OrderSummery";
+// import OrderSummery from "../components/orders/OrderSummery";
 import CheckOut from "../components/checkOut";
 import Profile from "../components/profile/Profile";
 import OrderList from "../components/orders/OrderList";
@@ -30,10 +30,10 @@ const myRouter = createBrowserRouter([
     exact: false,
     element: <Cart />,
   },
-  {
-    path: "order",
-    element: <OrderSummery />,
-  },
+  // {
+  //   path: "order",
+  //   element: <OrderSummery />,
+  // },
   {
     path: "checkout",
     element: <CheckOut />,
@@ -59,10 +59,9 @@ const myRouter = createBrowserRouter([
     element: <AddProduct />,
   },
   {
-    path:"edit-product/:productId",
-    element: <EditProduct/> 
-  }
-
+    path: "edit-product/:productId",
+    element: <EditProduct />,
+  },
 ]);
 
 export default myRouter;

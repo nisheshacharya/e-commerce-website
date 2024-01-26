@@ -25,9 +25,9 @@ export default function Home() {
     // console.log("state: ", state.user);
   }, []);
 
-  const getProductsArray = async (token) => {
+  const getProductsArray = async () => {
     try {
-      const res = await getProducts(token);
+      const res = await getProducts();
 
       const unfiltered = res.data;
       const filtered = filterDeleated(unfiltered);

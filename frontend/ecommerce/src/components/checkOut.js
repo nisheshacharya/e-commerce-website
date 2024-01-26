@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import "../styles/Style.css";
 import { useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { addOrder, sendEmail } from "../network/network";
+import { addOrder, getProductById, sendEmail } from "../network/network";
 import { useNavigate } from "react-router-dom";
 import GlobalContext from "../context";
 import PayPalComponent from "./paypal/PayPalComponent";
+import { updateProduct } from "../network/network";
 
 export default function CheckOut() {
   const navigate = useNavigate();
@@ -27,6 +28,9 @@ export default function CheckOut() {
     address.state == "";
   const location = useLocation();
 
+  const token = localStorage.getItem("user");
+  // console.log("token: ", token);
+
   let cartTotal = 0;
 
   useEffect(() => {
@@ -47,7 +51,7 @@ export default function CheckOut() {
 
   const handlePaySelect = (e) => {
     setPayMethod(e.target.value);
-    console.log("selected:", e.target.value);
+    // console.log("selected:", e.target.value);
   };
 
   const handleCheckOut = (e) => {
@@ -59,10 +63,10 @@ export default function CheckOut() {
     const totalAmount = cartTotalPrice;
     const orderDateTime = Date.now();
     const payment = { method: payMethod };
-    console.log(payment);
+    // console.log(payment);
     const status = "ordered";
     const items = checkOutData.cartData;
-    console.log("items: ", items);
+    // console.log("items: ", items);
 
     const order = {
       userId,
@@ -82,6 +86,10 @@ export default function CheckOut() {
     alert("Checkout successful");
     navigate("/");
   };
+
+  
+
+  // getProducts();
 
   return (
     <div>

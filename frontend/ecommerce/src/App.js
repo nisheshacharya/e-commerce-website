@@ -15,9 +15,7 @@ function App() {
 
     return (
         <GlobalContext.Provider value={{ state, setState, cartData, setCartData, totalAmount, setTotalAmount}}>
-            {/* <div className="App">
-                {state?.user ? <RouterProvider router={myRouter}  /> : <RouterProvider router={mySignupRouter} />}
-            </div> */}
+            
             <CheckingCom />
             
         </GlobalContext.Provider>

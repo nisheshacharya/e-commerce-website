@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import {
   addOrder,
+  getProductById,
   sendEmail,
+  updateProduct,
   updateProductQuantity,
 } from "../../network/network";
 import GlobalContext from "../../context";
@@ -14,6 +16,7 @@ export default function PayPalComponent(prop) {
   const { cartData, setCartData } = useContext(GlobalContext);
   console.log(prop.prop);
 
+  const token = localStorage.getItem("user");
   const items = prop.prop.checkOutData.cartData;
   const totalAmount = prop.prop.cartTotalPrice;
   const userId = jwtDecode(localStorage.getItem("user")).userId;
@@ -31,8 +34,8 @@ export default function PayPalComponent(prop) {
     status,
   };
 
-  console.log(order);
-  console.log("item, ", items);
+  // console.log(order);
+  // console.log("item, ", items);
 
   useEffect(() => {
     console.log(prop);
@@ -57,8 +60,18 @@ export default function PayPalComponent(prop) {
   };
 
   const onSuccess = (details, data) => {
+    console.time(sendEmail);
     sendEmail(userEmail);
+    console.timeEnd(sendEmail);
+
+    console.time(decreaseCount);
+    decreaseCount();
+    console.timeEnd(decreaseCount);
+
+    console.time(addOrder);
     addOrder(order, localStorage.getItem("user"));
+    console.timeEnd(addOrder);
+
     localStorage.removeItem("cart");
     setCartData([]);
     alert("Checkout successful");
@@ -73,6 +86,45 @@ export default function PayPalComponent(prop) {
 
   const onError = (err) => {
     console.error("Error during transaction:", err);
+  };
+
+  const decreaseCount = async () => {
+    const cartItems = JSON.parse(localStorage.getItem("cart"));
+    let id;
+
+    await Promise.all(
+      cartItems.map(async (item) => {
+        id = item._id;
+
+        try {
+          const res = await getProductById(id);
+          console.log(res);
+
+          const name = res.name;
+          const description = res.description;
+          const quantity = res.quantity - 1;
+          const price = res.price;
+          const category = res.category;
+          const deleted = res.deleted;
+
+          const dataToUpdate = {
+            name: name,
+            description: description,
+            quantity: quantity,
+            price: price,
+            category: category,
+            deleted: quantity > 0 ? true : false,
+          };
+
+          const updated = await updateProduct(id, dataToUpdate, token);
+          // const update = await updateProduct
+
+          console.log(updated);
+        } catch (error) {
+          console.error(error);
+        }
+      })
+    );
   };
 
   return (

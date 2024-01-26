@@ -80,7 +80,7 @@ export default function EditProduct() {
           <label>
             Price:
             <input
-              type="text"
+              type="number"
               name="price"
               value={productDetails.price}
               onChange={handleChange}

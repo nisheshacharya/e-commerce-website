@@ -16,8 +16,8 @@ export default function Cart() {
     localCartData = JSON.parse(localStorage.getItem("cart"));
     if (localCartData) {
       let copyLocalData = [...localCartData];
-      console.log("local cart data: ", localCartData);
-      console.log("cart data from cart ", cartData);
+      // console.log("local cart data: ", localCartData);
+      // console.log("cart data from cart ", cartData);
       setCartData(localCartData);
       copyLocalData.forEach((item) => (total += item.price));
       setTotalAmount(total);
@@ -43,12 +43,7 @@ export default function Cart() {
         <div className="cart-total">
           <h4> Total- $ {getTotal()}</h4>
           {getTotal() > 0 && (
-            <Link
-              to={{
-                pathname: "/checkout",
-              }}
-              state={{ cartData }}
-            >
+            <Link to={{pathname: "/checkout"}} state={{ cartData }}>
               <button>CheckOut</button>
             </Link>
           )}

@@ -26,7 +26,6 @@ const OrderList = () => {
   const getOrders = async () => {
     try {
       const orderData = await getAllOrders();
-
       setOrders(orderData);
     } catch (error) {
       console.error("Error getting orders");
@@ -36,12 +35,13 @@ const OrderList = () => {
   const userOrders = async () => {
     try {
       const orderDataByUser = await pullOrdersByUsers(userId, token);
-      console.log(orderDataByUser.data);
+      // console.log(orderDataByUser.data);
       setOrders(orderDataByUser.data);
     } catch (error) {
       console.error("Error getting order");
     }
   };
+
 
   return (
     <div>

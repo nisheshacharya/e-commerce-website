@@ -10,11 +10,9 @@ export const CheckingCom = () => {
   console.log("Hey", state.user === null);
   return (
     <div>
-      {/* <RouterProvider
-        router={state?.user ? myRouter: mySignupRouter}
-      /> */}
+      
       {res ? (
-        // <RouterProvider router={state?.user ? myRouter : mySignupRouter} />
+       
         <RouterProvider router={ res ? myRouter : <Login />} />
       ) : (
         <RouterProvider router={mySignupRouter} />
