@@ -14,9 +14,12 @@ export default function Home() {
   const [productsCopy, setProductsCopy] = useState([]);
 
   const role = jwtDecode(localStorage.getItem("user")).role;
+  console.log("jwtDecode(local) ",jwtDecode(localStorage.getItem("user")) )
+  console.log("role ", role);
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("In home component")
     if (state.user === null) {
       setState({ user: localStorage.getItem("user") });
       console.log("state saved");
@@ -25,9 +28,9 @@ export default function Home() {
     // console.log("state: ", state.user);
   }, []);
 
-  const getProductsArray = async () => {
+  const getProductsArray = async (token) => {
     try {
-      const res = await getProducts();
+      const res = await getProducts(token);
 
       const unfiltered = res.data;
       const filtered = filterDeleated(unfiltered);

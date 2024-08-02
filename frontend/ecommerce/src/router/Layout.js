@@ -1,22 +1,21 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../components/Home";
+//import Home from "../components/Home";
 
 import Cart from "../components/Cart/Cart";
 
-// import OrderSummery from "../components/orders/OrderSummery";
+//import OrderSummery from "../components/orders/OrderSummery";
 import CheckOut from "../components/checkOut";
 import Profile from "../components/profile/Profile";
-import OrderList from "../components/orders/OrderList";
+//import OrderList from "../components/orders/OrderList";
 import AddReview from "../components/review/AddReview";
 import EditProfile from "../components/profile/EditProfile";
 import AddProduct from "../components/product/AddProduct";
 import EditProduct from "../components/product/EditProduct";
+import Home from "../components/Home";
+import OrderList from "../components/Orders/OrderList";
 
 const myRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
+ 
   {
     path: "home",
     element: <div>HELLO</div>,
@@ -30,10 +29,7 @@ const myRouter = createBrowserRouter([
     exact: false,
     element: <Cart />,
   },
-  // {
-  //   path: "order",
-  //   element: <OrderSummery />,
-  // },
+  
   {
     path: "checkout",
     element: <CheckOut />,
@@ -59,9 +55,13 @@ const myRouter = createBrowserRouter([
     element: <AddProduct />,
   },
   {
-    path: "edit-product/:productId",
-    element: <EditProduct />,
+    path:"edit-product/:productId",
+    element: <EditProduct/> 
   },
+  {path: "/",
+    element: <Home/>
+  }
+
 ]);
 
 export default myRouter;

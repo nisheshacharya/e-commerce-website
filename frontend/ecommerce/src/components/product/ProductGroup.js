@@ -13,13 +13,14 @@ export default function Product({ product, isAdmin }) {
 
   let totalRating = 0;
   useEffect(() => {
+    // const filteredProduct = product.filte
     product.reviews.map((review) => (totalRating += review.rating));
+    // console.log("Product: ", product)
     setAverageRating((totalRating / product.reviews.length).toFixed(1));
   }, []);
 
   const toggleReview = () => {
     setShowReview(!showReview);
-    console.log(product);
   };
 
   const addToCart = () => {

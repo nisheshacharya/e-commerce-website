@@ -6,12 +6,15 @@ const User = require("../models/userModel");
 // Register a new user
 exports.registerUser = async (req, res) => {
   const { email, userName, password } = req.body;
+  console.log("req.body: ", req.body);
 
   try {
     // Check if the email is already taken
     const existingUser = await User.findByEmail(email);
+    console.log("existing User ", existingUser);
     if (existingUser) {
-      return res.status(400).json({ message: "Email is already in use." });
+     
+      return res.status(400).json({ success: false, message: `Email is already in use.` });
     }
 
     // Hash the password
@@ -19,16 +22,15 @@ exports.registerUser = async (req, res) => {
 
     const user = new User(email, userName, hashedPassword);
     await user.save();
-    console.log(user);
+    // console.log(user);
 
-    res
-      .status(201)
-      .json({ success: true, message: `User registered successfully.` });
+    res.status(201).json({ success: true, message: `User registered successfully.` });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Internal server error." });
+    res.status(500).json({ success: false, message: "Internal server error." });
   }
 };
+
 
 // User login
 exports.loginUser = async (req, res) => {

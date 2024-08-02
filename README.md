@@ -1,31 +1,77 @@
-# MIU-CS566-2023-12A-12B-01
-## Please update this report before 6:00 PM CST every day.
-
-* 11/28/2023
-    Today: 
-        Finalized specs, design.
-        Created a breakdown table of tasks to perform on front and back end. 
-        npm init and installed required dependencies for backend. 
-
-    Plan for tomorrow: 
-        Connect mongoDB for backend. 
-        write CURD functions for User, products and cart
-        Implement authentication 
-        Test the backend and make sure every this is running. 
-
-*11/29/2023
-
-    Yesterday: 
-        Tried to work with mongodb Atlas and got stuck.
-        Setup regular mongodb for backend. 
-        implemented and tested signup on backend.
-        implemented and tested login on backend. 
-        implemented jwt token while logging in on backend. 
-
-    Plan for today: 
-        Finish working on backend.
-        
-
-
-
-    
++-----------------------------+------------------------------------------------------+----------------------------------+
+| **                          | **                                                   | **                               |
+| Phase   **                  | Task   **                                            | Description   **                 |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+| Backend   Development       | Install Node.js   and npm                            |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             | Create a project   directory and                     | npm init                         |
+|                             | initialize it as a                                   |                                  |
+|                             | Node.js project                                      |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             | Install the   necessary dependencies                 |                                  |
+|                             | for chosen backend framework                         |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             | Define the   database schema for application         | user, product,   order           |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             | Create a database   connection and                   |                                  |
+|                             | implement data access methods for CRUD operations    |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             | Implement   email notification                       | Nodemailer   or SendGrid         |
+|                             | using a Nodemailer library                           |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             | Implement   payment processing                       | PayPal   or Stripe               |
+|                             | using a payment gateway                              |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             |                                                      |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             |                                                      |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+| Frontend   Development      | Create a React   project for                         |                                  |
+|                             | the frontend application                             |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             | Define the React   components                        | Signup, login,   product list,   |
+|                             | for the user interface                               | product detail, product review,  |
+|                             |                                                      | cart, checkout, edit product,    |
+|                             |                                                      |  add product, profile            |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             | Use React Router   to handle                         |                                  |
+|                             | routing between different pages                      |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             | State management                                     |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             | Create API calls   to the backend                    |                                  |
+|                             |  to fetch data and perform actions                   |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             |                                                      |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             |                                                      |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+| Integration                 | Deploy the backend   application to a server         |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+| Integration                 | Configure the   frontend application                 |                                  |
+|                             |  to point to the deployed backend URL                |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+|                             |                                                      |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+
+|                             |                                                      |                                  |
+| Testing and   Deployment    | Test after every   function implementation           |                                  |
++-----------------------------+------------------------------------------------------+----------------------------------+

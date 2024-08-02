@@ -6,13 +6,14 @@ import GlobalContext from "../context";
 import Login from "./Login";
 export const CheckingCom = () => {
   const { state, setState } = useContext(GlobalContext);
+
   const res = localStorage.getItem("user");
-  console.log("Hey", state.user === null);
+  console.log("Token from local storage: ", res);
   return (
     <div>
-      
+    
       {res ? (
-       
+        
         <RouterProvider router={ res ? myRouter : <Login />} />
       ) : (
         <RouterProvider router={mySignupRouter} />

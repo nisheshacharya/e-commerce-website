@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 export default function Order({ order }) {
+  console.log("order: ", order);
   const { orderDateTime, totalAmount, items, state, setState } = order;
   const [showOrderDetail, setShowOrderDetail] = useState(false);
   const [itemList, setItemList] = useState([]);
@@ -29,7 +30,7 @@ export default function Order({ order }) {
         }
         return acc;
       }, []);
-      // console.log("unique items array", uniqueItemsArray);
+      console.log("unique items array", uniqueItemsArray);
 
       setItemList(uniqueItemsArray);
       console.log("item List: ", uniqueItemsArray);
@@ -44,10 +45,12 @@ export default function Order({ order }) {
 
   return (
     <div className="order-container">
+     
+     
       <div className="order-detail-div">
         <div className="order-details">
           <p className="order-date">
-            Order Date: {new Date(orderDateTime).toLocaleString()}
+            Order Date:  {(orderDateTime)?new Date(orderDateTime).toLocaleString(): ""}
           </p>
           <p>Number of items: {Array.isArray(items) ? items.length : 0}</p>
           <p className="total-amount">
@@ -83,7 +86,8 @@ export default function Order({ order }) {
           </div>
         )}
       </div>
+       
     </div>
   );
 }
-// <button className="review-button">Write a Review</button>
+<button className="review-button">Write a Review</button>

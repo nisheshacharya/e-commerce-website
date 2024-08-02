@@ -6,6 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import LocalContext from "../context/localContext";
 import { getProductByName } from "../network/network";
 
+
 function Header() {
   const { cartData, setCartData, state, setState } = useContext(GlobalContext);
   const { products, setProducts, productsCopy } = useContext(LocalContext);
@@ -57,7 +58,8 @@ function Header() {
         }}
       >
         <img
-          src="https://tse3.mm.bing.net/th?id=OIP.qqjTs7jvKi_6zKhI4sTRjAHaGy&pid=Api&P=0&h=220"
+          src= "/logo.svg"
+
           alt="Logo"
           className="logo"
         />
